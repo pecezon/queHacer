@@ -1,0 +1,21 @@
+# Ignorar archivos de entorno
+.env
+*.env
+
+# Ignorar dependencias de Node.js y Maven
+node_modules/
+**/node_modules/
+target/
+**/target/
+
+# Ignorar configuraciones de sistema
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Ignorar archivos de logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
