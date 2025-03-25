@@ -6,7 +6,7 @@ const EventPage = () => {
   return (
     <div>
       <h1>Event Page number {id}</h1>
-      <p>Welcome to the event page!</p>
+      <p>Welcome to the event page Ramiro gei!</p>
     </div>
   );
 };
