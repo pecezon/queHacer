@@ -6,7 +6,7 @@ const EventPage = () => {
   const { id } = useParams();
   return (
     <div>
-      <div></div>
+      <Nav></Nav>
       <div>
         <h1>Event Page number {id}</h1>
         <p>Welcome to the event page Ramiro gei!</p>

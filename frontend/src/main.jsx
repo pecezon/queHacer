@@ -13,7 +13,7 @@ import LogIn from "./pages/auth/LogIn.jsx";
 import SignUp from "./pages/auth/SignUp.jsx";
 import Validate from "./pages/auth/Validate.jsx";
 import Landing from "./pages/landing/Landing.jsx";
-import NotFound from "./pages/error/notFound.jsx";
+import NotFound from "./pages/error/NotFound.jsx";
 import EventPage from "./pages/event/EventPage.jsx";
 import CreateEvent from "./pages/creatorTools/CreateEvent.jsx";
 import EventDashboard from "./pages/admin/EventDashboard.jsx";
