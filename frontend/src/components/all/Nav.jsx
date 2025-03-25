@@ -1,7 +1,11 @@
 import React from "react";
 
 const Nav = () => {
-  return <div>NavBar</div>;
+  return (
+    <div>
+      IM GEI
+    </div>
+  );
 };
 
 export default Nav;
