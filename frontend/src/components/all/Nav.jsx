@@ -1,9 +1,10 @@
 import React from "react";
 
+
 const Nav = () => {
   return (
-    <div>
-      IM GEI
+    <div className="flex items-center bg-black w-screen">
+      Hola
     </div>
   );
 };
