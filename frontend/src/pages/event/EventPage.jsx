@@ -7,7 +7,7 @@ const EventPage = () => {
   return (
     <div>
       <div>
-        <Nav/>
+        <Nav />
       </div>
       <div>
         <h1>Event Page number {id}</h1>
@@ -18,5 +18,3 @@ const EventPage = () => {
 };
 
 export default EventPage;
-
-
