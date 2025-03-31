@@ -17,6 +17,7 @@ import NotFound from "./pages/error/NotFound.jsx";
 import EventPage from "./pages/event/EventPage.jsx";
 import CreateEvent from "./pages/creatorTools/CreateEvent.jsx";
 import EventDashboard from "./pages/admin/EventDashboard.jsx";
+import Events from "./pages/event/Events.jsx";
 
 const router = createBrowserRouter([
   //Main Page Route
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
 
   //Routes for the event process
   { path: "/event/:id", element: <EventPage /> },
+  { path: "/events", element: <Events/> },
 
   //Routes for the creator tools
   { path: "/createEvent", element: <CreateEvent /> },
