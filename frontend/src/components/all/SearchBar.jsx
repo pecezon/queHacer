@@ -41,7 +41,7 @@ function SearchBar() {
   return (
       <Input
         classNames={{
-          base: "w-full sm:w-9/12 h-10",
+          base: "w-full sm:w-6/12 h-10",
           mainWrapper: "h-full",
           input: "text-small",
           inputWrapper:
