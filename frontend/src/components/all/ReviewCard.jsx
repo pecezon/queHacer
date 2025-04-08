@@ -23,17 +23,17 @@ function ReviewCard({
 
   return (
     <div className={`relative flex ${cardSize} border-4 border-${borderColor} rounded-3xl p-4 bg-white shadow-lg`}>
-      <div className="flex-1 flex flex-col justify-center items-center text-center space-y-2">
+      <div className="flex-1 flex flex-col justify-center items-start text-left space-y-2">
         <p className="text-lg font-medium text-gray-800">
           {title}
         </p>
 
-        <p className="text-sm text-gray-500 px-2">
+        <p className="text-sm text-gray-500 px-2 pr-4">
           {description}
         </p>
       </div>
 
-      <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex flex-col space-y-1">
+      <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex flex-col-reverse space-y-1">
         {[1, 2, 3, 4, 5].map((star) => (
           <button
             key={star}

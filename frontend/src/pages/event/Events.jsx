@@ -18,14 +18,14 @@ function Events() {
           <div className="flex flex-wrap flex-1 justify-center gap-5 pt-2.5">
             <ReviewCard
               title="Ramiro gei"
-              description="Muy buena calidad de gei y frio"
-              initialRating={5}
+              description="Muy buena calidad de gei y frio sfdksjfksj sfjslkfsjlk sfsk jsjfs"
+              initialRating={4.5}
               interactive={false}
             />
             <ReviewCard
               title="Reseña de ramiro gei"
               description="le encanta el ramiro gei"
-              initialRating={5}
+              initialRating={1}
               interactive={false}
             />
           </div>
