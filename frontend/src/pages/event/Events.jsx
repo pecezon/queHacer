@@ -28,6 +28,36 @@ function Events() {
               initialRating={1}
               interactive={false}
             />
+            <ReviewCard
+              title="Reseña de ramiro gei"
+              description="le encanta el ramiro gei"
+              initialRating={1}
+              interactive={false}
+            />
+            <ReviewCard
+              title="Reseña de ramiro gei"
+              description="le encanta el ramiro gei"
+              initialRating={1}
+              interactive={false}
+            />
+            <ReviewCard
+              title="Reseña de ramiro gei"
+              description="le encanta el ramiro gei"
+              initialRating={1}
+              interactive={false}
+            />
+            <ReviewCard
+              title="Reseña de ramiro gei"
+              description="le encanta el ramiro gei"
+              initialRating={1}
+              interactive={false}
+            />
+            <ReviewCard
+              title="Reseña de ramiro gei"
+              description="le encanta el ramiro gei"
+              initialRating={1}
+              interactive={false}
+            />
           </div>
         </div>
       </div>
