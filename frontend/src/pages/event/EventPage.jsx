@@ -12,14 +12,14 @@ const EventPage = () => {
   const descripcion = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, sint tenetur soluta saepe ratione, obcaecati voluptates reiciendis aliquid quidem ipsam harum aspernatur pariatur odit? Sed quidem consectetur et culpa dolorem."
 
   return (
-    <div>
+    <div className="flex flex-col w-full h-full">
       <div>
         <Nav />
       </div>
       <div>
         <Etiquetas/>
       </div>
-      <div className="w-full flex flex-wrap  flex-col justify-center items-center gap-2 pt-5"> 
+      <div className="w-full flex flex-wrap flex-col justify-center items-center gap-2 pt-5"> 
         <h3 className="text-2xl">CONCIERTO LUIS MIGUEL</h3>
         <h5 className="text-xl">{horaInicio} - {horaFin}</h5>
         <p className="flex text-md text-center">

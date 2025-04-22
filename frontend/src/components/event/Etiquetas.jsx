@@ -6,23 +6,6 @@ function Etiquetas() {
     "Rock",
     "Hard Rock",
     "Punk Rock",
-    "Indie Rock",
-    "Rock Alternativo",
-    "EDM",
-    "House",
-    "Techno",
-    "Drum and Bass",
-    "Trance",
-    "Pop",
-    "Synthpop",
-    "K-pop",
-    "Electropop",
-    "Hip-Hop",
-    "Rap",
-    "Trap",
-    "Reggaetón",
-    "Salsa",
-    "Jazz",
   ];
 
   const menor = '50';
@@ -32,7 +15,7 @@ function Etiquetas() {
     React.useState(generosMusicales);
 
   return (
-    <div className="flex gap-4 flex-wrap p-5 bg-[url('/images/background.jpg')] bg-cover bg-center justify-center">
+    <div className="flex gap-4 flex-wrap w-full p-5 bg-[url('/images/background.jpg')] bg-cover bg-center justify-center">
       {tipos_de_eventos.map((tipo, index) => (
         <Chip key={index} variant="flat" className="bg-black text-white">
           {tipo}
