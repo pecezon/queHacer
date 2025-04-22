@@ -13,24 +13,21 @@ const EventPage = () => {
 
   return (
     <div className="flex flex-col w-full h-full">
-      <div>
-        <Nav />
-      </div>
-      <div>
-        <Etiquetas/>
-      </div>
-      <div className="w-full flex flex-wrap flex-col justify-center items-center gap-2 pt-5"> 
-        <h3 className="text-2xl">CONCIERTO LUIS MIGUEL</h3>
+      <Nav/>
+      <Etiquetas/>
+      <div className="w-full flex flex-wrap flex-col justify-center items-center gap-2 p-10"> 
+        <h3 className="text-2xl font-bold">CONCIERTO LUIS MIGUEL</h3>
         <h5 className="text-xl">{horaInicio} - {horaFin}</h5>
         <p className="flex text-md text-center">
           {descripcion}
         </p>
       </div>
-      <div>
+      <div className="w-full flex flex-wrap flex-row items-center gap-2 p-4">
         <CardEventUbi/>
-      </div>
-      <div>
         <CardTIckets/>
+        <CardTIckets/>
+        <CardTIckets/>
+        
       </div>
     </div>
   );
