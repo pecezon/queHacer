@@ -3,6 +3,7 @@ import { StarIcon } from "@heroicons/react/24/solid";
 import { StarIcon as StarOutline } from "@heroicons/react/24/outline";
 
 function ReviewCard({
+  id,
   title = "Título predeterminado",
   description = "Descripción predeterminada",
   initialRating = 3,
@@ -10,7 +11,8 @@ function ReviewCard({
   showRatingNumber = true,
   borderColor = "blue-700",
   cardSize = "w-64 h-64",
-  interactive = true
+  interactive = false,
+  category = "music" 
 }) {
   const [rating, setRating] = useState(initialRating);
 
@@ -22,7 +24,10 @@ function ReviewCard({
   };
 
   return (
-    <div className={`relative flex ${cardSize} border-4 border-${borderColor} rounded-3xl p-4 bg-white shadow-lg`}>
+    <div 
+      className={`relative flex ${cardSize} border-4 border-${borderColor} rounded-3xl p-4 bg-white shadow-lg`}
+      data-category={category} 
+    >
       <div className="flex-1 flex flex-col justify-center items-start text-left space-y-2">
         <p className="text-lg font-medium text-gray-800">
           {title}
