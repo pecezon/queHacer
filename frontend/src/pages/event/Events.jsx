@@ -21,14 +21,16 @@ function Events() {
       initialRating: 5,
       borderColor: "red-500",
       category: "food",
+      imageUrl: "/images/download.jpeg"
     },
     {
       id: 2,
       title: "La Cevichería",
-      description: "Ceviche fresco y delicioso.",
+      description: "Ceviche fresco y delicioso. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique enim quaerat ab aut illum omnis quis cum quos explicabo corporis fugit, tempore optio assumenda placeat totam quo doloremque perspiciatis. Aliquid.",
       initialRating: 4,
       borderColor: "green-500",
       category: "food",
+      imageUrl: "/images/cevicheria.png"
     },
     {
       id: 3,
@@ -37,6 +39,7 @@ function Events() {
       initialRating: 4,
       borderColor: "purple-500",
       category: "food",
+      imageUrl: "/images/cafeluna.jpeg"
     },
     {
       id: 4,
@@ -45,6 +48,7 @@ function Events() {
       initialRating: 5,
       borderColor: "blue-500",
       category: "food",
+      imageUrl: "/images/elpuerto.jpeg"
     },
     {
       id: 5,
@@ -53,6 +57,7 @@ function Events() {
       initialRating: 4,
       borderColor: "yellow-500",
       category: "music",
+      imageUrl: "/images/malecon.jpeg"
     },
     {
       id: 6,
@@ -61,6 +66,7 @@ function Events() {
       initialRating: 3,
       borderColor: "indigo-500",
       category: "art",
+      imageUrl: "/images/galeriadearte.jpeg"
     },
   ];
 
@@ -90,6 +96,7 @@ function Events() {
           initialRating={r.initialRating}
           borderColor={r.borderColor}
           category={r.category}
+          imageUrl={r.imageUrl}
         />
       ))}
     </div>
