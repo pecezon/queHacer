@@ -1,6 +1,7 @@
 package com.queHacer.queHacer.User.Service;
 
 import com.queHacer.queHacer.Command;
+import com.queHacer.queHacer.Exceptions.UserNotFoundException;
 import com.queHacer.queHacer.User.Model.User;
 import com.queHacer.queHacer.User.Repository.UserRepository;
 import org.springframework.http.HttpStatus;
@@ -29,9 +30,6 @@ public class DeleteUserService implements Command<Integer, Void> {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
 
-        //TODO handle exceptions
-
-
-        return null;
+        throw new UserNotFoundException();
     }
 }

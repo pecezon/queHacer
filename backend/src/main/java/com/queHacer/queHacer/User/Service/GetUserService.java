@@ -1,5 +1,6 @@
 package com.queHacer.queHacer.User.Service;
 
+import com.queHacer.queHacer.Exceptions.UserNotFoundException;
 import com.queHacer.queHacer.Query;
 import com.queHacer.queHacer.User.Model.User;
 import com.queHacer.queHacer.User.Model.UserDTO;
@@ -26,7 +27,6 @@ public class GetUserService implements Query<Integer, UserDTO> {
             return ResponseEntity.ok(new UserDTO(userOptional.get()));
         }
 
-        //TODO exception if not found
-        return null;
+        throw new UserNotFoundException();
     }
 }
