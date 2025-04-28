@@ -47,7 +47,7 @@ function SearchBar() {
           inputWrapper:
             "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
         }}
-        placeholder="Que hacer en ..."
+        placeholder="¿Qué hacer en ..."
         size="lg"
         startContent={<SearchIcon size={15} />}
         type="search"
