@@ -1,24 +1,24 @@
-import { Button, Card, CardBody } from '@heroui/react'
-import React from 'react'
+import { Button, Card, CardBody } from '@heroui/react';
+import React from 'react';
 
-function CardTIckets() {
+function CardTIckets({ fecha, logo }) {
   return (
-    <div className='flex flex-wrap w-1/3'>
-      <Card>
-        <CardBody>
-          <h3>22 de marzo de 2025 · Ensenada, Baja California</h3>
-          <Button className="flex items-center bg-white rounded-md shadow-md hover:bg-gray-100 transition">
+    <div className="w-full p-1 md:w-2/3 lg:w-2/3">
+      <Card className="w-full h-full">
+        <CardBody className="p-4 flex flex-col gap-4">
+          <h3>{fecha}</h3>
+          <Button className="w-full flex items-center gap-3 bg-white rounded-md shadow-md hover:bg-gray-100 transition px-4 py-3">
             <img
-              src="https://cdn.brandfetch.io/idVogTb1a1/w/800/h/800/theme/dark/icon.png?c=1dxbfHSJFAPEGdCLU4o5B"
-              alt="Ticketmaster Logo"
-              className="w-auto h-6 rounded-full"
+              src={logo}
+              alt="Logo"
+              className="w-auto h-6 rounded-full shrink-0"
             />
-            <span className="text-black font-medium">Comprar boletos</span>
+            <span className="text-black font-medium whitespace-nowrap">Comprar Boletos</span>
           </Button>
         </CardBody>
       </Card>
     </div>
-  )
+  );
 }
 
-export default CardTIckets
+export default CardTIckets;
