@@ -1,0 +1,51 @@
+name: Test CI/CD
+
+on:
+  push:
+    branches: [main, backend, frontend]
+  pull_request:
+    branches: [main, backend, frontend]
+
+jobs:
+  frontend-check:
+    name: Build React App
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./frontend
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+  backend-check:
+    name: Build Spring Boot App
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./backend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 23
+        uses: actions/setup-java@v4
+        with:
+          java-version: "23"
+          distribution: "temurin"
+
+      - name: Give execute permission to mvnw
+        run: chmod +x mvnw
+
+      - name: Build and Run tests - spring goat
+        env:
+          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+          DATABASE_USER: ${{ secrets.DATABASE_USER }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: ./mvnw clean install
