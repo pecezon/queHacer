@@ -40,15 +40,12 @@ jobs:
           java-version: "23"
           distribution: "temurin"
 
-      - name: Give execute permission to mvnw
-        run: chmod +x mvnw
-
       - name: Build with maven
-        run: ./mvnw clean package
+        run: ./mvn clean install
 
       - name: Run tests - spring goat
         env:
           DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
           DATABASE_USER: ${{ secrets.DATABASE_USER }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: ./mvnw test
+        run: ./mvn test
