@@ -14,14 +14,6 @@ import org.springframework.test.context.TestPropertySource;
 @TestPropertySource(locations = "classpath:application-test.properties")
 class QueHacerApplicationTests {
 
-	@BeforeAll
-	static void setUp(){
-		Dotenv dotenv = Dotenv.load();
-		System.setProperty("DATABASE_URL", dotenv.get("DATABASE_URL"));
-		System.setProperty("DATABASE_USER", dotenv.get("DATABASE_USER"));
-		System.setProperty("DATABASE_PASSWORD", dotenv.get("DATABASE_PASSWORD"));
-	}
-
 	@Test
 	void contextLoads() {
 
