@@ -51,6 +51,9 @@ jobs:
           echo "DATABASE_USER=$DATABASE_USER" >> .env
           echo "DATABASE_NAME=$DATABASE_NAME" >> .env
 
+      - name: Give execute permission to mvnw
+        run: chmod +x mvnw
+
       - name: Build with maven
         run: ./mvnw clean package
 
