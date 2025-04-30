@@ -2,6 +2,9 @@ package com.queHacer.queHacer.User.Model;
 
 import com.queHacer.queHacer.User.Rol;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -17,22 +20,30 @@ public class User {
     @Column(name = "id")
     private Integer id;
 
+    @NotNull(message = "Email is required")
+    @Email(message = "Invalid email format")
     @Column(name = "email")
     private String email;
 
+    @NotNull(message = "Password is required")
     @Column(name = "passwordHash")
     private String passwordHash;
 
     //use libphonenumber for validation later.
+    @NotNull(message = "Phone is required")
+    @Size(min = 10, message = "Phone number must be 10 digits long at least")
     @Column(name = "phoneNumber")
     private String phoneNumber;
 
+    @NotNull(message = "Name is required NIBBA")
     @Column(name = "name")
     private String name;
 
+    @NotNull(message = "Lastname is required")
     @Column(name = "lastname")
     private String lastname;
 
+    @NotNull(message = "Rol is required")
     @Column(name = "rol")
     @Enumerated(EnumType.STRING)
     private Rol rol;
@@ -77,6 +88,10 @@ public class User {
     //Verification code generator
     private Integer generateVerificationCode() {
         return 100000 + new Random().nextInt(900000);
+    }
+
+    public String getEmail(){
+        return email;
     }
 
 }

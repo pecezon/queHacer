@@ -1,10 +1,12 @@
 package com.queHacer.queHacer.User.Service;
 
 import com.queHacer.queHacer.Command;
+import com.queHacer.queHacer.Exceptions.UserNotFoundException;
 import com.queHacer.queHacer.User.Model.UpdateUserCommand;
 import com.queHacer.queHacer.User.Model.User;
 import com.queHacer.queHacer.User.Model.UserDTO;
 import com.queHacer.queHacer.User.Repository.UserRepository;
+import com.queHacer.queHacer.User.Validators.UserValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -46,12 +48,12 @@ public class UpdateUserService implements Command<UpdateUserCommand, UserDTO> {
                 user.setPasswordHash(command.getUser().getPasswordHash());
             }
 
+            UserValidator.execute(user);
 
             userRepository.save(user);
             return ResponseEntity.ok(new UserDTO(user));
         }
 
-        //TODO exception handling
-        return null;
+        throw new UserNotFoundException();
     }
 }
