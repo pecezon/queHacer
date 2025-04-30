@@ -7,6 +7,8 @@ import com.queHacer.queHacer.User.Model.User;
 import com.queHacer.queHacer.User.Model.UserDTO;
 import com.queHacer.queHacer.User.Repository.UserRepository;
 import com.queHacer.queHacer.User.Validators.UserValidator;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+@CachePut(value = "productCache", key = "#command.getId()")
 public class UpdateUserService implements Command<UpdateUserCommand, UserDTO> {
 
     private final UserRepository userRepository;
