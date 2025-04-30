@@ -50,5 +50,5 @@ jobs:
         env:
           DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
           DATABASE_USER: ${{ secrets.DATABASE_USER }}
-          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: ./mvnw test
