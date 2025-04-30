@@ -1,0 +1,58 @@
+name: Test CI/CD
+
+on:
+  push:
+    branches: [main, backend, frontend]
+  pull_request:
+    branches: [main, backend, frontend]
+
+jobs:
+  frontend-check:
+    name: Build React App
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./frontend
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+  backend-check:
+    name: Build Spring Boot App
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./backend
+
+    env:
+      DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+      DATABASE_USER: ${{ secrets.DATABASE_USER }}
+      DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: "temurin"
+
+      - name: Create .env file
+        run: |
+          echo "DATABASE_PASSWORD=$DATABASE_PASSWORD" > .env
+          echo "DATABASE_USER=$DATABASE_USER" >> .env
+          echo "DATABASE_NAME=$DATABASE_NAME" >> .env
+
+      - name: Build with maven
+        run: ./mvnw clean package
+
+      - name: Run tests - spring goat
+        run: ./mvnw test
