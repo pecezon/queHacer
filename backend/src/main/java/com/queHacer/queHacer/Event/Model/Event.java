@@ -23,10 +23,10 @@ public class Event {
     private String description;
 
     @Column(name = "minPrice")
-    private Integer minPrice;
+    private Long minPrice;
 
     @Column(name = "maxPrice")
-    private Integer maxPrice;
+    private Long maxPrice;
 
     @Column(name = "instagram")
     private String instagram;
@@ -46,14 +46,14 @@ public class Event {
     @Column(name = "endDate")
     private LocalDateTime endDate;
 
-    @Column(name="number")
-    private int number;
+    @Column(name="streetNnumber")
+    private Integer streetNumber;
 
     @Column(name = "street")
     private String street;
 
     @Column(name = "zip_code")
-    private int zip_code;
+    private Integer zip_code;
 
     @Column(name = "county")
     private String county;
@@ -65,15 +65,15 @@ public class Event {
     private String country;
 
     @Column(name = "id_creator")
-    private int id_creator;
+    private Integer id_creator;
 
     @Column(name = "phone")
     private String phone;
 
     @Column (name = "sumReviews")
-    private int sumReviews;
+    private Long sumReviews;
 
     @Column (name = "cantReviews")
-    private int cantReviews;
+    private Double cantReviews;
 
 }

@@ -10,24 +10,24 @@ public class EventDTO {
     private Integer id;
     private String name;
     private String description;
-    private Integer minPrice;
-    private Integer maxPrice;
+    private Long minPrice;
+    private Long maxPrice;
     private String instagram;
     private String facebook;
     private String whatsapp;
     private String twitter;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
-    private int number;
+    private Integer streetNumber;
     private String street;
-    private int zip_code;
+    private Integer zip_code;
     private String county;
     private String city;
     private String country;
-    private int id_creator;
+    private Integer id_creator;
     private String phone;
-    private int sumReviews;
-    private int cantReviews;
+    private Long sumReviews;
+    private Double cantReviews;
 
 
     public EventDTO(Event event) {
@@ -42,7 +42,7 @@ public class EventDTO {
         this.twitter = event.getTwitter();
         this.startDate = event.getStartDate();
         this.endDate = event.getEndDate();
-        this.number = event.getNumber();
+        this.streetNumber = event.getStreetNumber();
         this.street = event.getStreet();
         this.zip_code = event.getZip_code();
         this.county = event.getCounty();

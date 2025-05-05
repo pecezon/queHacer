@@ -3,6 +3,7 @@ package com.queHacer.queHacer.Event.Controller;
 import com.queHacer.queHacer.Event.Model.Event;
 import com.queHacer.queHacer.Event.Model.EventDTO;
 import com.queHacer.queHacer.Event.Model.UpdateEventCommand;
+import com.queHacer.queHacer.Event.Model.UpdateEventDTO;
 import com.queHacer.queHacer.Event.Service.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -53,7 +54,7 @@ public class EventController {
     }
 
     @PutMapping("/event/{id}")
-    public ResponseEntity<EventDTO> updateEvent(@PathVariable Integer id, @RequestBody Event event){
+    public ResponseEntity<EventDTO> updateEvent(@PathVariable Integer id, @RequestBody UpdateEventDTO event){
         return updateEventService.execute(new UpdateEventCommand(id, event));
     }
 

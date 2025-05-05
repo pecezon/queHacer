@@ -5,10 +5,10 @@ import lombok.Getter;
 @Getter
 public class UpdateEventCommand {
     private Integer id;
-    private Event event;
+    private UpdateEventDTO updateEventDTO;
 
-    public UpdateEventCommand(Integer id, Event event) {
+    public UpdateEventCommand(Integer id, UpdateEventDTO updateEventDTO) {
         this.id = id;
-        this.event = event;
+        this.updateEventDTO = updateEventDTO;
     }
 }
