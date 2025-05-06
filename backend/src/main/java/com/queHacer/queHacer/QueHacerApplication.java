@@ -13,6 +13,8 @@ public class QueHacerApplication {
 		System.setProperty("DATABASE_USER", dotenv.get("DATABASE_USER"));
 		System.setProperty("DATABASE_PASSWORD", dotenv.get("DATABASE_PASSWORD"));
 
+
+
 		SpringApplication.run(QueHacerApplication.class, args);
 	}
 
