@@ -70,7 +70,7 @@ function Events() {
     },
   ];
 
-  const [reviews, setReviews] = useState(initialReviews);
+  // const [reviews, setReviews] = useState(initialReviews);
   const [filteredReviews, setFilteredReviews] = useState(initialReviews);
 
   // Manejar cambios en los filtros

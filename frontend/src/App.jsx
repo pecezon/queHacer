@@ -1,12 +1,21 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import User from "./User";
+import Nav from "./components/all/Nav";
 
 function App() {
+  const [userData, setUserData] = useState({
+    name: "Ramiro Gei",
+    email: "ramirogei@gmail.com",
+    phone: "123456789",
+    validID: "xxdfsdfsdf",
+    address: "Calle 3, Ensenada",
+    picture: "/images/cevicheria.png",
+  });
+
   return (
     <>
-      <h1>Ramiro Wei el mas frio del universo</h1>
+      <Nav userData={userData} />
+      <User userData={userData} setUserData={setUserData} />
     </>
   );
 }

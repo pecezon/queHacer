@@ -15,6 +15,7 @@ import {
 } from "@heroui/react";
 import { useState } from "react";
 import '../../index.css'
+import { useUser } from "../../pages/user/UserProvider";
 
 export const AcmeLogo = () => {
   return (
@@ -30,6 +31,7 @@ export const AcmeLogo = () => {
 };
 
 export default function App() {
+  const { userData } = useUser();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menuItems = [
@@ -40,7 +42,7 @@ export default function App() {
 
   return (
     <Navbar
-      className="bg-white dark:bg-gray shadow-sm w-full flex justify-between items-center"
+      className="bg-white dark:bg-gray shadow-sm w-full flex justify-between items-center p-3"
       maxWidth="full"
       position="sticky"
       isMenuOpen={isMenuOpen}
@@ -50,14 +52,10 @@ export default function App() {
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="sm:hidden" // Solo visible en móvil (menos de 640px)
+          className="sm:hidden" 
         />
         <NavbarBrand>
-          {/* <AcmeLogo /> */}
-          <img src="../images/logoQueHacerEn.svg" alt="Logo" className="w-16 h-auto"/>
-          {/*<p class="font-bold text-inherit text-gray-800 dark:text-white">
-            ¿QUE HACER EN...
-          </p>*/}
+          <img src="../images/logoQueHacerEn.svg" alt="Logo" className="w-20 h-auto"/>
         </NavbarBrand>
       </NavbarContent>
 
@@ -87,11 +85,11 @@ export default function App() {
             <Avatar
               isBordered
               as="button"
-              className="transition-transform hover:scale-110"
+              className="transition-transform hover:scale-110 w-10 h-10"
               color="secondary"
-              name="Jason Hughes"
+              name={userData.name}
               size="sm"
-              src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+              src={userData.picture}
             />
           </DropdownTrigger>
           <DropdownMenu
@@ -101,31 +99,13 @@ export default function App() {
           >
             <DropdownItem key="profile" className="h-14 gap-2">
               <p className="font-semibold">Signed in as</p>
-              <p className="font-semibold text-secondary">zoey@example.com</p>
+              <p className="font-semibold text-secondary">{userData.email}</p>
             </DropdownItem>
             <DropdownItem
               key="settings"
               className="hover:bg-gray-100 dark:hover:bg-gray-800"
             >
-              My Settings
-            </DropdownItem>
-            <DropdownItem
-              key="system"
-              className="hover:bg-gray-100 dark:hover:bg-gray-800"
-            >
-              System
-            </DropdownItem>
-            <DropdownItem
-              key="configurations"
-              className="hover:bg-gray-100 dark:hover:bg-gray-800"
-            >
-              Configurations
-            </DropdownItem>
-            <DropdownItem
-              key="help_and_feedback"
-              className="hover:bg-gray-100 dark:hover:bg-gray-800"
-            >
-              Help & Feedback
+              <Link href="/userPage">Cuenta</Link>
             </DropdownItem>
             <DropdownItem
               key="logout"
@@ -139,7 +119,7 @@ export default function App() {
       </NavbarContent>
 
       {/* Menú móvil (SOLO visible en móvil al hacer clic) */}
-      <NavbarMenu className="bg-white dark:bg-gray pt-4 sm:hidden">
+      <NavbarMenu className="bg-white dark:bg-gray pt-8 sm:hidden">
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item.name}-${index}`}>
             <Link
