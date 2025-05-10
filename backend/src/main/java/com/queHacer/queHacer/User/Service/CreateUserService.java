@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
- @Service
+@Service
 public class CreateUserService implements Command<User, UserDTO> {
 
     private final UserRepository userRepository;

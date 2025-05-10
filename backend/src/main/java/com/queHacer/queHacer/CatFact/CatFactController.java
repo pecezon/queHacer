@@ -15,7 +15,7 @@ public class CatFactController {
     }
 
     @GetMapping("/catfact")
-    public ResponseEntity<CatFactDTO> getFact(@RequestParam Integer max_length){
+    public ResponseEntity<CatFactDTO> getFact(@RequestParam Integer  max_length){
         return catFactService.execute(max_length);
     }
 }
