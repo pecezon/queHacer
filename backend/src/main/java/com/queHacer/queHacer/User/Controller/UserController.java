@@ -1,7 +1,7 @@
 package com.queHacer.queHacer.User.Controller;
 
 import com.queHacer.queHacer.User.Model.UpdateUserCommand;
-import com.queHacer.queHacer.User.Model.User;
+import com.queHacer.queHacer.User.Model.AppUser;
 import com.queHacer.queHacer.User.Model.UserDTO;
 import com.queHacer.queHacer.User.Service.*;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 public class UserController {
+
 
     private final CreateUserService createUserService;
 
@@ -36,9 +37,9 @@ public class UserController {
         this.searchUserService = searchUserService;
     }
 
-    @PostMapping("/user")
-    public ResponseEntity<UserDTO> createUser(@RequestBody User user){
-        return createUserService.execute(user);
+    @PostMapping("/createnewuser")
+    public ResponseEntity<UserDTO> createUser(@RequestBody AppUser appUser){
+        return createUserService.execute(appUser);
     }
 
     @GetMapping("/users")
@@ -57,8 +58,8 @@ public class UserController {
     }
 
     @PutMapping("/user/{id}")
-    public ResponseEntity<UserDTO> updateUser(@PathVariable Integer id, @RequestBody User user){
-        return updateUserService.execute(new UpdateUserCommand(id, user));
+    public ResponseEntity<UserDTO> updateUser(@PathVariable Integer id, @RequestBody AppUser appUser){
+        return updateUserService.execute(new UpdateUserCommand(id, appUser));
     }
 
     @DeleteMapping("/user/{id}")

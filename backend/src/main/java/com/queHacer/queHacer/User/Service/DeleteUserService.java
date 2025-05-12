@@ -2,7 +2,7 @@ package com.queHacer.queHacer.User.Service;
 
 import com.queHacer.queHacer.Command;
 import com.queHacer.queHacer.Exceptions.UserNotFoundException;
-import com.queHacer.queHacer.User.Model.User;
+import com.queHacer.queHacer.User.Model.AppUser;
 import com.queHacer.queHacer.User.Repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +22,7 @@ public class DeleteUserService implements Command<Integer, Void> {
     @Override
     public ResponseEntity<Void> execute(Integer input) {
 
-        Optional<User> optionalUser = userRepository.findById(input);
+        Optional<AppUser> optionalUser = userRepository.findById(input);
 
         if (optionalUser.isPresent()){
             userRepository.deleteById(input);

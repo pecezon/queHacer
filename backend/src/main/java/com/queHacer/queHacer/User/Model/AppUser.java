@@ -13,7 +13,7 @@ import java.util.Random;
 @Entity
 @Data
 @Table(name = "users")
-public class User {
+public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +35,7 @@ public class User {
     @Column(name = "phoneNumber")
     private String phoneNumber;
 
-    @NotNull(message = "Name is required NIBBA")
+    @NotNull(message = "Name is required")
     @Column(name = "name")
     private String name;
 
@@ -90,8 +90,5 @@ public class User {
         return 100000 + new Random().nextInt(900000);
     }
 
-    public String getEmail(){
-        return email;
-    }
 
 }

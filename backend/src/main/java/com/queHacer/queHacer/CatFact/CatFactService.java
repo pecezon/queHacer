@@ -24,7 +24,7 @@ public class CatFactService implements Query<Integer, CatFactDTO> {
     @Override
     public ResponseEntity<CatFactDTO> execute (Integer input){
         URI uri = UriComponentsBuilder
-                .fromUriString("https://catfact.ninja/fact")
+                .fromUriString(baseURL)
                 .queryParam(MAX_LENGTH, input)
                 .build()
                 .toUri();
