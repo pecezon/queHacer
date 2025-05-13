@@ -1,6 +1,7 @@
 package com.queHacer.queHacer.Event.Service;
 
 import com.queHacer.queHacer.Command;
+import com.queHacer.queHacer.Event.Exceptions.EventNotFoundException;
 import com.queHacer.queHacer.Event.Model.Event;
 import com.queHacer.queHacer.Event.Repository.EventRepository;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class DeleteEventService implements Command<Integer, Void> {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
 
-        //Not Found Exception
-        return null;
+
+        throw new EventNotFoundException();
     }
 }

@@ -1,6 +1,7 @@
 package com.queHacer.queHacer.Event.Service;
 
 import com.queHacer.queHacer.Command;
+import com.queHacer.queHacer.Event.Exceptions.EventNotFoundException;
 import com.queHacer.queHacer.Event.Model.Event;
 import com.queHacer.queHacer.Event.Model.EventDTO;
 import com.queHacer.queHacer.Event.Model.UpdateEventCommand;
@@ -56,6 +57,6 @@ public class UpdateEventService implements Command<UpdateEventCommand, EventDTO>
         }
 
         //Not Found Exception
-        return null;
+        throw new EventNotFoundException();
     }
 }

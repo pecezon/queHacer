@@ -1,5 +1,6 @@
 package com.queHacer.queHacer.Event.Service;
 
+import com.queHacer.queHacer.Event.Exceptions.EventNotFoundException;
 import com.queHacer.queHacer.Event.Model.Event;
 import com.queHacer.queHacer.Event.Model.EventDTO;
 import com.queHacer.queHacer.Event.Repository.EventRepository;
@@ -25,7 +26,7 @@ public class GetEventService implements Query<Integer, EventDTO> {
             return ResponseEntity.ok(new EventDTO(eventOptional.get()));
         }
 
-        //exception when Event not found
-        return null;
+
+        throw new EventNotFoundException();
     }
 }

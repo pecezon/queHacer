@@ -1,13 +1,11 @@
 package com.queHacer.queHacer.Event.Controller;
 
-import com.queHacer.queHacer.Event.Model.Event;
-import com.queHacer.queHacer.Event.Model.EventDTO;
-import com.queHacer.queHacer.Event.Model.UpdateEventCommand;
-import com.queHacer.queHacer.Event.Model.UpdateEventDTO;
+import com.queHacer.queHacer.Event.Model.*;
 import com.queHacer.queHacer.Event.Service.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -24,17 +22,27 @@ public class EventController {
 
     private final SearchEventService searchEventService;
 
+    private final GetEventByCreatorIdService getEventByCreatorIdService;
+
+
+    private final GetEventsByCityAndCountryService getEventsByCityAndCountryService;
+
+    private final GetEventsByCertainDate getEventsByCertainDate;
+
     public EventController(CreateEventService createEventService,
                            GetEventsService getEventsService,
                            UpdateEventService updateEventService,
                            DeleteEventService deleteEventService,
-                           GetEventService getEventService, SearchEventService searchEventService) {
+                           GetEventService getEventService, SearchEventService searchEventService, GetEventByCreatorIdService getEventByCreatorIdService, GetEventsByCityAndCountryService getEventsByCityAndCountryService, GetEventsByCertainDate getEventsByCertainDate) {
         this.createEventService = createEventService;
         this.getEventsService = getEventsService;
         this.updateEventService = updateEventService;
         this.deleteEventService = deleteEventService;
         this.getEventService = getEventService;
         this.searchEventService = searchEventService;
+        this.getEventByCreatorIdService = getEventByCreatorIdService;
+        this.getEventsByCityAndCountryService = getEventsByCityAndCountryService;
+        this.getEventsByCertainDate = getEventsByCertainDate;
     }
 
 
@@ -66,5 +74,21 @@ public class EventController {
     @GetMapping("/event/search")
     public ResponseEntity<List<EventDTO>> searchEventByName(@RequestParam String name){
         return searchEventService.execute(name);
+    }
+
+    @GetMapping("/event/creator")
+    public ResponseEntity<List<EventDTO>> getEventsByCreatorId(@RequestParam Integer creatorId){
+        return getEventByCreatorIdService.execute(creatorId);
+    }
+
+
+    @GetMapping("/event/search/city-country")
+    public ResponseEntity<List<EventDTO>> getEventsByCity(@RequestParam String city, @RequestParam String country){
+        return getEventsByCityAndCountryService.execute(new CityAndCountryCommand(city,country));
+    }
+
+    @GetMapping("/event/search/by-date")
+    public ResponseEntity<List<EventDTO>> getEventsByDay(@RequestParam LocalDate date){
+        return getEventsByCertainDate.execute(date);
     }
 }
