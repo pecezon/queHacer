@@ -24,6 +24,7 @@ public class SecurityController {
 
     @GetMapping("/special")
     public String special(){
+
         return "SPECIAL";
     }
 
