@@ -4,6 +4,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.User;
 
 import javax.crypto.SecretKey;
@@ -16,7 +18,8 @@ public class JwtUtil {
         return Jwts
                 .builder()
                 .subject(user.getUsername())
-                .expiration(new Date(System.currentTimeMillis() + 300_000))
+                .claim("roles", user.getAuthorities())
+                .expiration(new Date(System.currentTimeMillis() + 300_000_000))
                 .signWith(getSigningKey())
                 .compact();
     }

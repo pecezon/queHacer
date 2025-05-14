@@ -24,7 +24,7 @@ public class CreateUserService implements Command<AppUser, UserDTO> {
     }
 
     @Override
-    public ResponseEntity<UserDTO> execute(AppUser appUser) {
+    public ResponseEntity<UserDTO> execute(AppUser appUser){
 
         //Validate the input data
         validateUser(appUser);

@@ -1,6 +1,8 @@
 package com.queHacer.queHacer.security;
 
 import com.queHacer.queHacer.User.Service.CUserDetailsService;
+import com.queHacer.queHacer.security.jwt.JwtAuthenticationFilter;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,14 +43,16 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorize) -> {
-                        authorize.requestMatchers("/login").permitAll();
-                        authorize.requestMatchers("/createnewuser").permitAll();
+                        authorize.requestMatchers(HttpMethod.POST,"/login").permitAll();
+                        authorize.requestMatchers(HttpMethod.POST,"/createnewuser").permitAll();
                         authorize.anyRequest().authenticated();
                 })
-                .addFilterBefore(
-                        new BasicAuthenticationFilter(authenticationManager(http)),
-                        UsernamePasswordAuthenticationFilter.class
-                )
+                .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .build();
+    }
+
+    @Bean
+    public JwtAuthenticationFilter jwtAuthenticationFilter(){
+        return new JwtAuthenticationFilter();
     }
 }
