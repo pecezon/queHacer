@@ -27,7 +27,8 @@ public class PlaceHeaderController {
      place.setId(1L);
      place.setName("Café del Bosque");
      place.setDescription("Un café escondido entre árboles, con wifi y repostería artesanal.");
-     place.setPriceRange(2L);
+     place.setMinPrice(100.0f);
+     place.setMaxPrice(200.0f);
      place.setInstagram("@cafedelbosque");
      place.setFacebook("facebook.com/cafedelbosque");
      place.setWhatsapp("1234567890");

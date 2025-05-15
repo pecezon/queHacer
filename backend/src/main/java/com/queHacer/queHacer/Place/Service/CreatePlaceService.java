@@ -32,7 +32,9 @@ public class CreatePlaceService implements Command<PlaceDTO, PlaceDTO> {
         Place place = new Place();
         place.setName(dto.getName());
         place.setDescription(dto.getDescription());
-        place.setPriceRange(dto.getPriceRange());
+        //place.setPriceRange(dto.getPriceRange());
+        place.setMinPrice(dto.getMinPrice());
+        place.setMaxPrice(dto.getMaxPrice());
         place.setInstagram(dto.getInstagram());
         place.setFacebook(dto.getFacebook());
         place.setWhatsapp(dto.getWhatsapp());

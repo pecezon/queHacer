@@ -19,8 +19,14 @@ public class PlaceValidator {
         if(place.getDescription().length() < 20){
             throw new PlaceNotValidException(PlaceErrorMessages.PLACE_DESCRIPTION_REQUIRED.getMessage());
         }
-        if(place.getPriceRange() == null || place.getPriceRange() < 0.00){
+        if(place.getMinPrice() < 0.0 || place.getMinPrice() > Float.MAX_VALUE){
+            throw new PlaceNotValidException(PlaceErrorMessages.PLACE_INVALID_MIN_PRICE.getMessage());
+        }
+        if(place.getMinPrice() > place.getMaxPrice()){
             throw new PlaceNotValidException(PlaceErrorMessages.PLACE_PRICE_RANGE_REQUIRED.getMessage());
+        }
+        if(place.getMaxPrice() < 0.0 || place.getMaxPrice() > Float.MAX_VALUE){
+            throw new PlaceNotValidException(PlaceErrorMessages.PLACE_INVALID_MAX_PRICE.getMessage());
         }
         if(StringUtils.isEmpty(place.getStreet())){
             throw new PlaceNotValidException(PlaceErrorMessages.PLACE_STREET_REQUIRED.getMessage());

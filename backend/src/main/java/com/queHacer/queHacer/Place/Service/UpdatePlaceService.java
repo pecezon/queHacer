@@ -31,7 +31,8 @@ public class UpdatePlaceService implements Command<UpdatePlaceCommand, PlaceDTO>
 
         if (dto.getName() != null) place.setName(dto.getName());
         if (dto.getDescription() != null) place.setDescription(dto.getDescription());
-        if (dto.getPriceRange() != null) place.setPriceRange(dto.getPriceRange());
+        if (dto.getMinPrice() != null) place.setMinPrice(dto.getMinPrice());
+        if(dto.getMaxPrice() != null) place.setMaxPrice(dto.getMaxPrice());
         if (dto.getInstagram() != null) place.setInstagram(dto.getInstagram());
         if (dto.getFacebook() != null) place.setFacebook(dto.getFacebook());
         if (dto.getWhatsapp() != null) place.setWhatsapp(dto.getWhatsapp());
@@ -46,6 +47,7 @@ public class UpdatePlaceService implements Command<UpdatePlaceCommand, PlaceDTO>
         if (dto.getPhoneNumber() != null) place.setPhoneNumber(dto.getPhoneNumber());
         if (dto.getReviewCount() != null) place.setReviewCount(dto.getReviewCount());
         if (dto.getReviewSum() != null) place.setReviewSum(dto.getReviewSum());
+        if(dto.getMainImage() != null) place.setMainImage(dto.getMainImage());
 
         PlaceValidator.execute(place);
         Place updated = placeRepository.save(place);

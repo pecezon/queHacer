@@ -24,8 +24,13 @@ public class Place {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String description;
 
-    @Column(name = "price_range")
-    private Long priceRange;
+    //@Column(name = "price_range")
+    //private Long priceRange;
+    @Column(name = "min_price")
+    private Float minPrice;
+
+    @Column(name = "max_price")
+    private Float maxPrice;
 
     @Column
     private String instagram;
@@ -63,6 +68,9 @@ public class Place {
     @Column(name = "review_sum")
     private Double reviewSum;
 
+    @Column(name = "main_image")
+    private String mainImage;
+
     @ManyToOne
     @JoinColumn(name = "id_creator", nullable = false) //FK
     private User creator;
@@ -72,6 +80,5 @@ public class Place {
 
     @Column(name = "phone_number",length = 20)
     private String phoneNumber;
-
 
 }

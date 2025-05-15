@@ -12,11 +12,4 @@ public class SearchPlaceByCityAndCountryCommand {
         this.country = country;
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public String getCountry() {
-        return country;
-    }
 }

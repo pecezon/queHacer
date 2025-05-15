@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/place")
+@RequestMapping("/place")
 public class PlaceController {
 
     private final UpdatePlaceService updatePlaceService;
@@ -23,9 +23,11 @@ public class PlaceController {
     private final SearchPlaceService searchPlaceService;
     private final GetPlaceByCreatorIdService getPlaceByCreatorIdService;
     private final SearchPlacesByCityAndCountryService searchPlacesByCityAndCountryService;
+    private final GetPlacesByPriceRangeService getPlacesByPriceRangeService;
+    private final GetFullPlaceService getFullPlaceService;
 
 
-    public PlaceController(UpdatePlaceService updatePlaceService, CreatePlaceService createPlaceService, DeletePlaceService deletePlaceService, GetPlaceByIdService getPlaceByIdService, SearchPlaceService searchPlaceService, GetPlaceByCreatorIdService getPlaceByCreatorIdService, SearchPlacesByCityAndCountryService searchPlacesByCityAndCountryService) {
+    public PlaceController(UpdatePlaceService updatePlaceService, CreatePlaceService createPlaceService, DeletePlaceService deletePlaceService, GetPlaceByIdService getPlaceByIdService, SearchPlaceService searchPlaceService, GetPlaceByCreatorIdService getPlaceByCreatorIdService, SearchPlacesByCityAndCountryService searchPlacesByCityAndCountryService, GetPlacesByPriceRangeService getPlacesByPriceRangeService, GetFullPlaceService getFullPlaceService) {
         this.updatePlaceService = updatePlaceService;
         this.createPlaceService = createPlaceService;
         this.deletePlaceService = deletePlaceService;
@@ -33,6 +35,8 @@ public class PlaceController {
         this.searchPlaceService = searchPlaceService;
         this.getPlaceByCreatorIdService = getPlaceByCreatorIdService;
         this.searchPlacesByCityAndCountryService = searchPlacesByCityAndCountryService;
+        this.getPlacesByPriceRangeService = getPlacesByPriceRangeService;
+        this.getFullPlaceService = getFullPlaceService;
     }
 
     @PostMapping
@@ -45,20 +49,27 @@ public class PlaceController {
         return getPlaceByIdService.execute(id);
     }
 
+    @GetMapping("/search/by-price-range")
+    public ResponseEntity<List<SummaryPlaceDTO>> searchPlacesByPriceRange(@RequestParam (required = false) Float minPrice, @RequestParam(required = false) Float maxPrice){return getPlacesByPriceRangeService.execute(new SearchPlacesByPriceRangeCommand(minPrice, maxPrice));}
+
     @GetMapping("/search/by-name")
-    public ResponseEntity<List<PlaceDTO>> searchPlaceByNameOrDescriptionContaining(@RequestParam String name){
+    public ResponseEntity<List<SummaryPlaceDTO>> searchPlaceByNameOrDescriptionContaining(@RequestParam String name){
         return searchPlaceService.execute(name);
     }
-    @GetMapping("/search/by-country-city/")
-    public ResponseEntity<List<PlaceDTO>> searchPlacesByCountryAndCity(@RequestParam String city, @RequestParam String country){
+    @GetMapping("/search/by-country-city")
+    public ResponseEntity<List<SummaryPlaceDTO>> searchPlacesByCountryAndCity(@RequestParam String city, @RequestParam String country){
         return searchPlacesByCityAndCountryService.execute(new SearchPlaceByCityAndCountryCommand(city,country));
     }
 
     @GetMapping("/creator/{creatorId}")
-    public ResponseEntity<List<PlaceDTO>> getPlaceByCreatorId(@PathVariable Integer creatorId){
+    public ResponseEntity<List<SummaryPlaceDTO>> getPlaceByCreatorId(@PathVariable Integer creatorId){
         return getPlaceByCreatorIdService.execute(creatorId);
     }
 
+    @GetMapping("/full-view/{id}")
+    public ResponseEntity<DisplayFullPlaceInfoDTO> getFullPlaceViewById(@PathVariable Long id){
+        return getFullPlaceService.execute(id);
+    }
     @PutMapping("/{id}")
     public ResponseEntity<PlaceDTO> updatePlace(@PathVariable Long id, @RequestBody UpdatePlaceDTO updatedPlace){
         return updatePlaceService.execute(new UpdatePlaceCommand(id, updatedPlace));

@@ -4,8 +4,8 @@ import lombok.Getter;
 
 @Getter
 public class UpdatePlaceCommand {
-    private Long id;
-    private UpdatePlaceDTO updatePlaceDTO;
+    private final Long id;
+    private final UpdatePlaceDTO updatePlaceDTO;
 
     public UpdatePlaceCommand(Long id, UpdatePlaceDTO updatePlaceDTO) {
         this.id = id;

@@ -2,6 +2,7 @@ package com.queHacer.queHacer.Place.Service;
 
 import com.queHacer.queHacer.Place.Exceptions.PlaceCreatorNotFound;
 import com.queHacer.queHacer.Place.Model.PlaceDTO;
+import com.queHacer.queHacer.Place.Model.SummaryPlaceDTO;
 import com.queHacer.queHacer.Place.Repository.PlaceRepository;
 import com.queHacer.queHacer.Query;
 import com.queHacer.queHacer.User.Model.User;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class GetPlaceByCreatorIdService implements Query<Integer, List<PlaceDTO>> {
+public class GetPlaceByCreatorIdService implements Query<Integer, List<SummaryPlaceDTO>> {
 
     private final PlaceRepository placeRepository;
     private final UserRepository userRepository;
@@ -24,12 +25,12 @@ public class GetPlaceByCreatorIdService implements Query<Integer, List<PlaceDTO>
     }
 
     @Override
-    public ResponseEntity<List<PlaceDTO>> execute(Integer input) {
+    public ResponseEntity<List<SummaryPlaceDTO>> execute(Integer input) {
         Optional<User> creator = userRepository.findById(input);
         if(creator.isPresent()){
-            List<PlaceDTO> places = placeRepository.findPlaceByCreatorId(input)
+            List<SummaryPlaceDTO> places = placeRepository.findPlaceByCreatorId(input)
                     .stream()
-                    .map(PlaceDTO::new)
+                    .map(SummaryPlaceDTO::new)
                     .toList();
 
             return ResponseEntity.ok(places);

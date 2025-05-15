@@ -6,7 +6,9 @@ import lombok.Data;
 public class UpdatePlaceDTO {
     private String name;
     private String description;
-    private Long priceRange;
+    //private Long priceRange;
+    private Float minPrice;
+    private Float maxPrice;
     private String instagram;
     private String facebook;
     private String whatsapp;
@@ -21,4 +23,5 @@ public class UpdatePlaceDTO {
     private String phoneNumber;
     private Long reviewCount;
     private Double reviewSum;
+    private String mainImage;
 }
