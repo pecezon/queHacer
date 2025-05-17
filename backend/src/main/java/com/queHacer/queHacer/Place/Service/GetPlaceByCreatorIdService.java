@@ -1,11 +1,10 @@
 package com.queHacer.queHacer.Place.Service;
 
 import com.queHacer.queHacer.Place.Exceptions.PlaceCreatorNotFound;
-import com.queHacer.queHacer.Place.Model.PlaceDTO;
 import com.queHacer.queHacer.Place.Model.SummaryPlaceDTO;
 import com.queHacer.queHacer.Place.Repository.PlaceRepository;
 import com.queHacer.queHacer.Query;
-import com.queHacer.queHacer.User.Model.User;
+import com.queHacer.queHacer.User.Model.AppUser;
 import com.queHacer.queHacer.User.Repository.UserRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -26,7 +25,7 @@ public class GetPlaceByCreatorIdService implements Query<Integer, List<SummaryPl
 
     @Override
     public ResponseEntity<List<SummaryPlaceDTO>> execute(Integer input) {
-        Optional<User> creator = userRepository.findById(input);
+        Optional<AppUser> creator = userRepository.findById(input);
         if(creator.isPresent()){
             List<SummaryPlaceDTO> places = placeRepository.findPlaceByCreatorId(input)
                     .stream()

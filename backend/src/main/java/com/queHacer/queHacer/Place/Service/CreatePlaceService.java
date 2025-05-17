@@ -5,7 +5,7 @@ import com.queHacer.queHacer.Place.Model.Place;
 import com.queHacer.queHacer.Place.Model.PlaceDTO;
 import com.queHacer.queHacer.Place.Repository.PlaceRepository;
 import com.queHacer.queHacer.Place.Validators.PlaceValidator;
-import com.queHacer.queHacer.User.Model.User;
+import com.queHacer.queHacer.User.Model.AppUser;
 import com.queHacer.queHacer.User.Repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +25,7 @@ public class CreatePlaceService implements Command<PlaceDTO, PlaceDTO> {
     @Override
     public ResponseEntity<PlaceDTO> execute(PlaceDTO dto) {
         // Buscar el creador
-        User creator = userRepository.findById(dto.getCreatorId())
+        AppUser creator = userRepository.findById(dto.getCreatorId())
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
         // Armar el place

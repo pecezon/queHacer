@@ -1,6 +1,6 @@
 package com.queHacer.queHacer.User.Headers;
 
-import com.queHacer.queHacer.User.Model.User;
+import com.queHacer.queHacer.User.Model.AppUser;
 import com.queHacer.queHacer.User.Rol;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,17 +21,17 @@ public class HeaderController {
     }
 
     @GetMapping(value = "/header/user", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<User> getUser(){
-        User user = new User();
-        user.setId(1);
-        user.setName("User Name");
-        user.setEmail("mock.email@gmail.com");
-        user.setRol(Rol.USER);
-        user.setLastname("User Lastname");
-        user.setPasswordHash("sdfghjk");
-        user.setPhoneNumber("123456789");
+    public ResponseEntity<AppUser> getUser(){
+        AppUser appUser = new AppUser();
+        appUser.setId(1);
+        appUser.setName("User Name");
+        appUser.setEmail("mock.email@gmail.com");
+        appUser.setRol(Rol.USER);
+        appUser.setLastname("User Lastname");
+        appUser.setPasswordHash("sdfghjk");
+        appUser.setPhoneNumber("123456789");
 
-        return ResponseEntity.ok(user);
+        return ResponseEntity.ok(appUser);
     }
 
 }

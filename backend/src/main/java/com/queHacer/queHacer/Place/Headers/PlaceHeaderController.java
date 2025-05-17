@@ -1,7 +1,7 @@
 package com.queHacer.queHacer.Place.Headers;
 
 import com.queHacer.queHacer.Place.Model.Place;
-import com.queHacer.queHacer.User.Model.User;
+import com.queHacer.queHacer.User.Model.AppUser;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +19,7 @@ public class PlaceHeaderController {
  }
  @GetMapping(value = "/header/place", produces = {MediaType.APPLICATION_JSON_VALUE , MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<Place> getPlace(){
-     User creator = new User();
+     AppUser creator = new AppUser();
      creator.setId(1);
      creator.setName("testUser");
 

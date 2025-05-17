@@ -1,6 +1,6 @@
 package com.queHacer.queHacer.Place.Model;
 
-import com.queHacer.queHacer.User.Model.User;
+import com.queHacer.queHacer.User.Model.AppUser;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -73,7 +73,7 @@ public class Place {
 
     @ManyToOne
     @JoinColumn(name = "id_creator", nullable = false) //FK
-    private User creator;
+    private AppUser creator;
 
     @Column(columnDefinition = "TEXT")
     private String menu;

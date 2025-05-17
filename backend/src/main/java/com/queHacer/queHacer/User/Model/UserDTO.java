@@ -1,7 +1,6 @@
 package com.queHacer.queHacer.User.Model;
 
 import com.queHacer.queHacer.User.Rol;
-import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -33,19 +32,19 @@ public class UserDTO {
 
     private Boolean isVerified;
 
-    public UserDTO(User user) {
-        this.id = user.getId();
-        this.email = user.getEmail();
-        this.passwordHash = user.getPasswordHash();
-        this.phoneNumber = user.getPhoneNumber();
-        this.name = user.getName();
-        this.lastname = user.getLastname();
-        this.rol = user.getRol();
-        this.createdAt = user.getCreatedAt();
-        this.updatedAt = user.getUpdatedAt();
-        this.verificationCode = user.getVerificationCode();
-        this.expirationVerificationCode = user.getExpirationVerificationCode();
-        this.isVerified = user.getIsVerified();
+    public UserDTO(AppUser appUser) {
+        this.id = appUser.getId();
+        this.email = appUser.getEmail();
+        this.passwordHash = appUser.getPasswordHash();
+        this.phoneNumber = appUser.getPhoneNumber();
+        this.name = appUser.getName();
+        this.lastname = appUser.getLastname();
+        this.rol = appUser.getRol();
+        this.createdAt = appUser.getCreatedAt();
+        this.updatedAt = appUser.getUpdatedAt();
+        this.verificationCode = appUser.getVerificationCode();
+        this.expirationVerificationCode = appUser.getExpirationVerificationCode();
+        this.isVerified = appUser.getIsVerified();
     }
 
 }

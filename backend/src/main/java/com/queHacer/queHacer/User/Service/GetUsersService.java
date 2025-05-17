@@ -1,7 +1,7 @@
 package com.queHacer.queHacer.User.Service;
 
 import com.queHacer.queHacer.Query;
-import com.queHacer.queHacer.User.Model.User;
+import com.queHacer.queHacer.User.Model.AppUser;
 import com.queHacer.queHacer.User.Model.UserDTO;
 import com.queHacer.queHacer.User.Repository.UserRepository;
 import org.springframework.http.HttpStatus;
@@ -21,8 +21,8 @@ public class GetUsersService implements Query<Void, List<UserDTO>> {
 
     @Override
     public ResponseEntity<List<UserDTO>> execute(Void input) {
-        List<User> users = userRepository.findAll();
-        List<UserDTO> userDTOs = users.stream().map(UserDTO::new).toList();
+        List<AppUser> appUsers = userRepository.findAll();
+        List<UserDTO> userDTOs = appUsers.stream().map(UserDTO::new).toList();
 
         return ResponseEntity.status(HttpStatus.OK).body(userDTOs);
     }
