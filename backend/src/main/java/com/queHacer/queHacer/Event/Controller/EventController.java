@@ -1,8 +1,12 @@
 package com.queHacer.queHacer.Event.Controller;
 
+import com.queHacer.queHacer.Event.Exceptions.EventNotFoundException;
+import com.queHacer.queHacer.Event.Exceptions.EventNotValidException;
 import com.queHacer.queHacer.Event.Model.*;
 import com.queHacer.queHacer.Event.Service.*;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -29,11 +33,15 @@ public class EventController {
 
     private final GetEventsByCertainDate getEventsByCertainDate;
 
+    private final GetEventsByDateRangeService getEventsByDateRangeService;
+
+    private final GetEventsByPriceService getEventsByPriceService;
+
     public EventController(CreateEventService createEventService,
                            GetEventsService getEventsService,
                            UpdateEventService updateEventService,
                            DeleteEventService deleteEventService,
-                           GetEventService getEventService, SearchEventService searchEventService, GetEventByCreatorIdService getEventByCreatorIdService, GetEventsByCityAndCountryService getEventsByCityAndCountryService, GetEventsByCertainDate getEventsByCertainDate) {
+                           GetEventService getEventService, SearchEventService searchEventService, GetEventByCreatorIdService getEventByCreatorIdService, GetEventsByCityAndCountryService getEventsByCityAndCountryService, GetEventsByCertainDate getEventsByCertainDate, GetEventsByDateRangeService getEventsByDateRangeService, GetEventsByPriceService getEventsByPriceService) {
         this.createEventService = createEventService;
         this.getEventsService = getEventsService;
         this.updateEventService = updateEventService;
@@ -43,6 +51,8 @@ public class EventController {
         this.getEventByCreatorIdService = getEventByCreatorIdService;
         this.getEventsByCityAndCountryService = getEventsByCityAndCountryService;
         this.getEventsByCertainDate = getEventsByCertainDate;
+        this.getEventsByDateRangeService = getEventsByDateRangeService;
+        this.getEventsByPriceService = getEventsByPriceService;
     }
 
 
@@ -72,23 +82,50 @@ public class EventController {
     }
 
     @GetMapping("/event/search")
-    public ResponseEntity<List<EventDTO>> searchEventByName(@RequestParam String name){
+    public ResponseEntity<List<EventSummaryDTO>> searchEventByName(@RequestParam String name){
         return searchEventService.execute(name);
     }
 
     @GetMapping("/event/creator")
-    public ResponseEntity<List<EventDTO>> getEventsByCreatorId(@RequestParam Integer creatorId){
+    public ResponseEntity<List<EventSummaryDTO>> getEventsByCreatorId(@RequestParam Integer creatorId){
         return getEventByCreatorIdService.execute(creatorId);
     }
 
 
     @GetMapping("/event/search/city-country")
-    public ResponseEntity<List<EventDTO>> getEventsByCity(@RequestParam String city, @RequestParam String country){
+    public ResponseEntity<List<EventSummaryDTO>> getEventsByCity(@RequestParam String city, @RequestParam String country){
         return getEventsByCityAndCountryService.execute(new CityAndCountryCommand(city,country));
     }
 
     @GetMapping("/event/search/by-date")
-    public ResponseEntity<List<EventDTO>> getEventsByDay(@RequestParam LocalDate date){
-        return getEventsByCertainDate.execute(date);
+    public ResponseEntity<List<EventSummaryDTO>> getEventsByDay(@RequestParam LocalDate date, @RequestParam String city, @RequestParam String country){
+        return getEventsByCertainDate.execute(new DateRangeCommand(date, city, country));
+    }
+
+    @GetMapping("/event/search/by-date-range")
+    public ResponseEntity<List<EventSummaryDTO>> getEventsBetween(@RequestParam LocalDate startDay, @RequestParam LocalDate endDay, @RequestParam String city, @RequestParam String country){
+        return getEventsByDateRangeService.execute(new DateRangeCommand(startDay,endDay,city,country));
+
+        //fehca de end tiene que ser menor a la de inicio
+    }
+
+    @GetMapping("/event/search/by-price")
+    public ResponseEntity<List<EventSummaryDTO>> getEventsBetweenPrice(@RequestParam Long minPrice, @RequestParam Long maxPrice, @RequestParam String city, @RequestParam String country){ //escribir bien maxPrice
+        return getEventsByPriceService.execute(new EventPriceCommand(minPrice,maxPrice, city, country));
+        //validar ciudad y precio max menor a max , si no se escribe alguno se toman valores aparte
+    }
+
+    @ExceptionHandler(EventNotFoundException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public EventErrorResponse handleEventNotFoundException(EventNotFoundException e){
+        return new EventErrorResponse(e.getMessage());
+    }
+
+    @ExceptionHandler(EventNotValidException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public EventErrorResponse handleEventNotValidException(EventNotValidException e){
+        return new EventErrorResponse(e.getMessage());
     }
 }

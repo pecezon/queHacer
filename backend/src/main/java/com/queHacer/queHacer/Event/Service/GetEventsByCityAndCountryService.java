@@ -3,6 +3,7 @@ package com.queHacer.queHacer.Event.Service;
 import com.queHacer.queHacer.Event.Model.CityAndCountryCommand;
 import com.queHacer.queHacer.Event.Model.Event;
 import com.queHacer.queHacer.Event.Model.EventDTO;
+import com.queHacer.queHacer.Event.Model.EventSummaryDTO;
 import com.queHacer.queHacer.Event.Repository.EventRepository;
 import com.queHacer.queHacer.Query;
 import org.springframework.http.HttpStatus;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class GetEventsByCityAndCountryService implements Query<CityAndCountryCommand, List<EventDTO>> {
+public class GetEventsByCityAndCountryService implements Query<CityAndCountryCommand, List<EventSummaryDTO>> {
 
     private final EventRepository eventRepository;
 
@@ -22,10 +23,12 @@ public class GetEventsByCityAndCountryService implements Query<CityAndCountryCom
 
 
     @Override
-    public ResponseEntity<List<EventDTO>> execute(CityAndCountryCommand input) {
+    public ResponseEntity<List<EventSummaryDTO>> execute(CityAndCountryCommand input) {
 
         List<Event> events = eventRepository.findByCityAndCountry(input.getCity(),input.getCountry());
-        List<EventDTO> eventDTOs = events.stream().map(EventDTO::new).toList();
-        return ResponseEntity.status(HttpStatus.OK).body(eventDTOs);
+
+        List<EventSummaryDTO> eventSummaryDTOSDTOs = events.stream().map(EventSummaryDTO::new).toList();
+
+        return ResponseEntity.status(HttpStatus.OK).body(eventSummaryDTOSDTOs);
     }
 }

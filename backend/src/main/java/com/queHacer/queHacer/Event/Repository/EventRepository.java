@@ -17,10 +17,15 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
     @Query("SELECT e from Event e WHERE e.id_creator = :keyword")
     List<Event> findByCreatorId(@Param("keyword") Integer idCreator);
 
-
     @Query("SELECT e from Event e WHERE LOWER(e.city) = LOWER(:city) AND LOWER(e.country) = LOWER(:country)")
     List<Event> findByCityAndCountry(@Param("city") String city, @Param("country") String country);
 
     @Query("SELECT e FROM Event e WHERE e.startDate BETWEEN :start AND :end")
-    List<Event> findByStartDateBetween(@Param("start") LocalDateTime start, @Param("end")LocalDateTime end);
+    List<Event> findByStartDate(@Param("start") LocalDateTime start, @Param("end")LocalDateTime end);
+
+    @Query("SELECT e from Event e WHERE LOWER(e.city) = LOWER(:city) AND LOWER(e.country) = LOWER(:country) AND (e.startDate BETWEEN :start AND :end)")
+    List<Event> findByStartDateBetween(@Param("start") LocalDateTime start, @Param("end")LocalDateTime end, @Param("city") String city, @Param("country") String country);
+
+    @Query("SELECT e from Event e WHERE (e.minPrice BETWEEN :min AND :max) AND (e.maxPrice BETWEEN :min AND :max) AND (LOWER(e.city) = LOWER(:city) AND LOWER(e.country) = LOWER(:country) )")
+    List<Event> findByPriceBetween(@Param("min") Long minPrice, @Param("max") Long maxPrice, @Param("city") String city, @Param("country") String country);
 }

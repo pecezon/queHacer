@@ -22,10 +22,10 @@ public class GetEventService implements Query<Integer, EventDTO> {
     @Override
     public ResponseEntity<EventDTO> execute(Integer input) {
         Optional<Event> eventOptional = eventRepository.findById(input);
+
         if (eventOptional.isPresent()){
             return ResponseEntity.ok(new EventDTO(eventOptional.get()));
         }
-
 
         throw new EventNotFoundException();
     }

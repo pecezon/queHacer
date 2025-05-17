@@ -1,8 +1,10 @@
 package com.queHacer.queHacer.Event.Service;
 
 
+import com.queHacer.queHacer.Event.Model.DateRangeCommand;
 import com.queHacer.queHacer.Event.Model.Event;
 import com.queHacer.queHacer.Event.Model.EventDTO;
+import com.queHacer.queHacer.Event.Model.EventSummaryDTO;
 import com.queHacer.queHacer.Event.Repository.EventRepository;
 import com.queHacer.queHacer.Query;
 import org.springframework.http.HttpStatus;
@@ -15,7 +17,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 @Service
-public class GetEventsByCertainDate implements Query<LocalDate, List<EventDTO>> {
+public class GetEventsByCertainDate implements Query<DateRangeCommand, List<EventSummaryDTO>> {
 
     private final EventRepository eventRepository;
 
@@ -25,13 +27,13 @@ public class GetEventsByCertainDate implements Query<LocalDate, List<EventDTO>> 
 
 
     @Override
-    public ResponseEntity<List<EventDTO>> execute(LocalDate input) {
-        LocalDateTime startOfDay= input.atStartOfDay();
-        LocalDateTime endOfDay = input.atTime(LocalTime.MAX);
+    public ResponseEntity<List<EventSummaryDTO>> execute(DateRangeCommand input) {
+        LocalDateTime startOfDay= input.getStartDate().atStartOfDay();
+        LocalDateTime endOfDay = input.getStartDate().atTime(LocalTime.MAX);
 
-        List<Event> events = eventRepository.findByStartDateBetween(startOfDay,endOfDay);
-        List<EventDTO> eventDTOS = events.stream().map(EventDTO::new).toList();
+        List<Event> events = eventRepository.findByStartDateBetween(startOfDay,endOfDay, input.getCity(), input.getCountry());
+        List<EventSummaryDTO> eventSummaryDTOSDTOS = events.stream().map(EventSummaryDTO::new).toList();
 
-        return ResponseEntity.status(HttpStatus.OK).body(eventDTOS);
+        return ResponseEntity.status(HttpStatus.OK).body(eventSummaryDTOSDTOS);
     }
 }
