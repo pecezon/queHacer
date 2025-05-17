@@ -14,8 +14,6 @@ import java.util.List;
 public class UserController {
 
 
-    private final CreateUserService createUserService;
-
     private final GetUsersService getUsersService;
 
     private final UpdateUserService updateUserService;
@@ -26,11 +24,10 @@ public class UserController {
 
     private final SearchUserService searchUserService;
 
-    public UserController(CreateUserService createUserService,
+    public UserController(
                           GetUsersService getUsersService,
                           UpdateUserService updateUserService,
                           DeleteUserService deleteUserService, GetUserService getUserService, SearchUserService searchUserService) {
-        this.createUserService = createUserService;
         this.getUsersService = getUsersService;
         this.updateUserService = updateUserService;
         this.deleteUserService = deleteUserService;
@@ -38,18 +35,14 @@ public class UserController {
         this.searchUserService = searchUserService;
     }
 
-    @PostMapping("/createnewuser")
-    public ResponseEntity<UserDTO> createUser(@RequestBody AppUser appUser){
-        return createUserService.execute(appUser);
-    }
 
-    @PreAuthorize("hasRole('admin')")
-    @GetMapping("/users")
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/get-all-users")
     public ResponseEntity<List<UserDTO>> getUsers(){
         return getUsersService.execute(null);
     }
 
-    @PreAuthorize("hasRole('admin')")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/user/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable Integer id){
         return getUserService.execute(id);
@@ -60,13 +53,13 @@ public class UserController {
         return searchUserService.execute(name);
     }
 
-    //@PreAuthorize("hasRole('admin') or #id == authentication.principal.id")
+    @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
     @PutMapping("/user/{id}")
     public ResponseEntity<UserDTO> updateUser(@PathVariable Integer id, @RequestBody AppUser appUser){
         return updateUserService.execute(new UpdateUserCommand(id, appUser));
     }
 
-    //@PreAuthorize("hasRole('admin') or #id == authentication.principal.id")
+    @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
     @DeleteMapping("/user/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Integer id){
         return deleteUserService.execute(id);

@@ -1,6 +1,6 @@
 package com.queHacer.queHacer.User.Model;
 
-import com.queHacer.queHacer.User.Rol;
+import com.queHacer.queHacer.User.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -58,7 +58,7 @@ public class AppUser implements UserDetails {
     @NotNull(message = "Rol is required")
     @Column(name = "rol")
     @Enumerated(EnumType.STRING)
-    private Rol rol;
+    private Role role;
 
     @Column(nullable = false, updatable = false, name = "createdAt")
     private LocalDateTime createdAt;
@@ -105,7 +105,7 @@ public class AppUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(rol.name()));
+        return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
     }
 
     @Override

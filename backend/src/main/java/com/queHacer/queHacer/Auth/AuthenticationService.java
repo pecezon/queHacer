@@ -4,7 +4,7 @@ import com.queHacer.queHacer.Exceptions.ErrorMessages;
 import com.queHacer.queHacer.Exceptions.UserNotValidException;
 import com.queHacer.queHacer.User.Model.AppUser;
 import com.queHacer.queHacer.User.Repository.UserRepository;
-import com.queHacer.queHacer.User.Rol;
+import com.queHacer.queHacer.User.Role;
 import com.queHacer.queHacer.security.jwt.JwtService;
 import com.queHacer.queHacer.User.Validators.UserValidator;
 import lombok.RequiredArgsConstructor;
@@ -34,9 +34,9 @@ public class AuthenticationService {
         admins.add("lopez.diego@cetys.edu.mx");
 
         if(admins.contains(request.getEmail())) {
-            request.setRol(Rol.ADMIN);
+            request.setRole(Role.ADMIN);
         }else{
-            request.setRol(Rol.USER);
+            request.setRole(Role.USER);
         }
 
         userRepository.save(request);

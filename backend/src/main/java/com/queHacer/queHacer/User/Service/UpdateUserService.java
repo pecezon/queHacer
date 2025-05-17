@@ -30,9 +30,6 @@ public class UpdateUserService implements Command<UpdateUserCommand, UserDTO> {
         if(userOptional.isPresent()){
             AppUser appUser = userOptional.get();
 
-            if (command.getAppUser().getEmail() != null) {
-                appUser.setEmail(command.getAppUser().getEmail());
-            }
             if (command.getAppUser().getPhoneNumber() != null) {
                 appUser.setPhoneNumber(command.getAppUser().getPhoneNumber());
             }
@@ -42,8 +39,8 @@ public class UpdateUserService implements Command<UpdateUserCommand, UserDTO> {
             if (command.getAppUser().getLastname() != null) {
                 appUser.setLastname(command.getAppUser().getLastname());
             }
-            if (command.getAppUser().getRol() != null) {
-                appUser.setRol(command.getAppUser().getRol());
+            if (command.getAppUser().getRole() != null) {
+                appUser.setRole(command.getAppUser().getRole());
             }
             if (command.getAppUser().getPasswordHash() != null) {
                 appUser.setPasswordHash(command.getAppUser().getPasswordHash());

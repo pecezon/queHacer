@@ -4,7 +4,7 @@ import com.queHacer.queHacer.Exceptions.UserNotFoundException;
 import com.queHacer.queHacer.User.Model.AppUser;
 import com.queHacer.queHacer.User.Model.UserDTO;
 import com.queHacer.queHacer.User.Repository.UserRepository;
-import com.queHacer.queHacer.User.Rol;
+import com.queHacer.queHacer.User.Role;
 import com.queHacer.queHacer.User.Service.GetUserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -40,7 +40,7 @@ public class GetAppUserServiceTest {
         appUser.setId(1);
         appUser.setName("User Name");
         appUser.setEmail("mock.email@gmail.com");
-        appUser.setRol(Rol.USER);
+        appUser.setRole(Role.USER);
         appUser.setLastname("User Lastname");
         appUser.setPasswordHash("sdfghjk");
         appUser.setPhoneNumber("123456789");
