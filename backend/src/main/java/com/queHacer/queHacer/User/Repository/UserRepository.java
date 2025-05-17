@@ -16,7 +16,7 @@ public interface UserRepository extends JpaRepository<AppUser, Integer> {
     List<AppUser> findByNameContaining(String input);
 
     //JPQL
-    @Query("SELECT p FROM User p WHERE p.name LIKE %:keyword% OR p.lastname LIKE %:keyword%")
+    @Query("SELECT p FROM AppUser p WHERE p.name LIKE %:keyword% OR p.lastname LIKE %:keyword%")
     List<AppUser> findByNameOrLastnameContaining(@Param("keyword") String name);
 
 }
