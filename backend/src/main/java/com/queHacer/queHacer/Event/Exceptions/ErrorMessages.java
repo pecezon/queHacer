@@ -1,12 +1,14 @@
 package com.queHacer.queHacer.Event.Exceptions;
 
 public enum ErrorMessages {
-    PRODUCT_NOT_FOUND("Product Not Found"),
+    EVENT_NOT_FOUND("Event Not Found"),
     NAME_REQUIRED("Name is required"),
     DESCRIPTION_LENGTH("Description length must be over 20 characters"),
-    MINIMUM_PRICE_CANNOT_BE_NEGATIVE("Minimum price should be listed and bigger than zero (0.00)"),
-    MAXIMUM_PRICE_NOT_LESSER_THAT_MINIMUM("Maximum price should be listed and no lesser than the minimum price"),
-    START_DAY_REQUIRED_AND_NOT_BEFORE_TODAY("Start date should be listed and it must be after todays date"),
+    INVALID_MINIMUM_PRICE("Valid minimum price should be specified"),
+    INVALID_MAXIMUM_PRICE("Valid maximum price should be specified"),
+    MAXIMUM_PRICE_NOT_LESS_THAT_MINIMUM("Maximum price should be no less than  minimum price"),
+    START_DAY_REQUIRED_AND_NOT_BEFORE_TODAY("Start date should be listed and it must be after today's date"),
+    END_DAY_NOT_BEFORE_START("End day must be after start day"),
     STREET_REQUIRED("Street adress is required"),
     CITY_REQUIRED("City is required"),
     COUNTY_REQUIRED("County is required"),

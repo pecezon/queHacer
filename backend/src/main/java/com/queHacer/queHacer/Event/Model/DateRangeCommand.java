@@ -1,19 +1,22 @@
 package com.queHacer.queHacer.Event.Model;
 
 import lombok.Getter;
+import lombok.Setter;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
 @Getter
+@Setter
 public class DateRangeCommand {
 
-    private final LocalDate startDate;
+    private  LocalDate startDate;
 
     private  LocalDate endDate;
 
-    private final String city;
+    private  String city;
 
-    private final String country;
+    private  String country;
 
     public DateRangeCommand(LocalDate startDate, LocalDate endDate, String city, String country) {
         this.startDate = startDate;
@@ -28,19 +31,4 @@ public class DateRangeCommand {
         this.country = country;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public String getCountry() {
-        return country;
-    }
 }

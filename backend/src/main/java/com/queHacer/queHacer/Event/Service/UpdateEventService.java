@@ -7,6 +7,7 @@ import com.queHacer.queHacer.Event.Model.EventDTO;
 import com.queHacer.queHacer.Event.Model.UpdateEventCommand;
 import com.queHacer.queHacer.Event.Model.UpdateEventDTO;
 import com.queHacer.queHacer.Event.Repository.EventRepository;
+import com.queHacer.queHacer.Event.validators.EventValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,6 +54,8 @@ public class UpdateEventService implements Command<UpdateEventCommand, EventDTO>
             if (updateEventDTO.getCantReviews() != null)event.setCantReviews(updateEventDTO.getCantReviews());
 
             Event updated = eventRepository.save(event);
+
+            EventValidator.execute(updated);
             return ResponseEntity.ok(new EventDTO(updated));
         }
 

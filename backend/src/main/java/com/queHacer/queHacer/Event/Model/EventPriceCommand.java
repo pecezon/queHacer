@@ -1,29 +1,31 @@
 package com.queHacer.queHacer.Event.Model;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class EventPriceCommand {
-    private final Long minPrice;
+    private  Float minPrice;
 
-    private final Long maxPrice;
+    private  Float maxPrice;
 
-    private final String city;
+    private  String city;
 
-    private final String country;
+    private  String country;
 
-    public EventPriceCommand(Long minPrice, Long maxPrice, String city, String country) {
+    public EventPriceCommand(Float minPrice, Float maxPrice, String city, String country) {
         this.minPrice = minPrice;
         this.maxPrice = maxPrice;
         this.city = city;
         this.country = country;
     }
 
-    public Long getMinPrice() {
+    public Float getMinPrice() {
         return minPrice;
     }
 
-    public Long getMaxPrice() {
+    public Float getMaxPrice() {
         return maxPrice;
     }
 
@@ -34,4 +36,5 @@ public class EventPriceCommand {
     public String getCountry() {
         return country;
     }
+
 }

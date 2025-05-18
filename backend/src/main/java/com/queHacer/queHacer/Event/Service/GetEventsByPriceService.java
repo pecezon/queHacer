@@ -5,6 +5,7 @@ import com.queHacer.queHacer.Event.Model.EventDTO;
 import com.queHacer.queHacer.Event.Model.EventPriceCommand;
 import com.queHacer.queHacer.Event.Model.EventSummaryDTO;
 import com.queHacer.queHacer.Event.Repository.EventRepository;
+import com.queHacer.queHacer.Event.validators.PriceRangeValidator;
 import com.queHacer.queHacer.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,8 @@ public class GetEventsByPriceService implements Query<EventPriceCommand, List<Ev
 
     @Override
     public ResponseEntity<List<EventSummaryDTO>> execute(EventPriceCommand input) {
+        PriceRangeValidator.execute(input);
+
         List<Event> events = eventRepository.findByPriceBetween(input.getMinPrice(), input.getMaxPrice(), input.getCity(), input.getCountry());
 
         List<EventSummaryDTO> eventSummaryDTOSDTOS = events.stream().map(EventSummaryDTO::new).toList();

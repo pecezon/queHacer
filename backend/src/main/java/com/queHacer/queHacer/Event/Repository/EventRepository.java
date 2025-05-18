@@ -27,5 +27,5 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
     List<Event> findByStartDateBetween(@Param("start") LocalDateTime start, @Param("end")LocalDateTime end, @Param("city") String city, @Param("country") String country);
 
     @Query("SELECT e from Event e WHERE (e.minPrice BETWEEN :min AND :max) AND (e.maxPrice BETWEEN :min AND :max) AND (LOWER(e.city) = LOWER(:city) AND LOWER(e.country) = LOWER(:country) )")
-    List<Event> findByPriceBetween(@Param("min") Long minPrice, @Param("max") Long maxPrice, @Param("city") String city, @Param("country") String country);
+    List<Event> findByPriceBetween(@Param("min") Float minPrice, @Param("max") Float maxPrice, @Param("city") String city, @Param("country") String country);
 }

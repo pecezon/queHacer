@@ -103,14 +103,14 @@ public class EventController {
     }
 
     @GetMapping("/event/search/by-date-range")
-    public ResponseEntity<List<EventSummaryDTO>> getEventsBetween(@RequestParam LocalDate startDay, @RequestParam LocalDate endDay, @RequestParam String city, @RequestParam String country){
+    public ResponseEntity<List<EventSummaryDTO>> getEventsBetween(@RequestParam LocalDate startDay, @RequestParam (required = false) LocalDate endDay, @RequestParam String city, @RequestParam String country){
         return getEventsByDateRangeService.execute(new DateRangeCommand(startDay,endDay,city,country));
 
         //fehca de end tiene que ser menor a la de inicio
     }
 
     @GetMapping("/event/search/by-price")
-    public ResponseEntity<List<EventSummaryDTO>> getEventsBetweenPrice(@RequestParam Long minPrice, @RequestParam Long maxPrice, @RequestParam String city, @RequestParam String country){ //escribir bien maxPrice
+    public ResponseEntity<List<EventSummaryDTO>> getEventsBetweenPrice(@RequestParam (required = false) Float minPrice, @RequestParam (required = false) Float maxPrice, @RequestParam String city, @RequestParam String country){ //escribir bien maxPrice
         return getEventsByPriceService.execute(new EventPriceCommand(minPrice,maxPrice, city, country));
         //validar ciudad y precio max menor a max , si no se escribe alguno se toman valores aparte
     }
@@ -128,4 +128,6 @@ public class EventController {
     public EventErrorResponse handleEventNotValidException(EventNotValidException e){
         return new EventErrorResponse(e.getMessage());
     }
+
+
 }

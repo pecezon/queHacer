@@ -6,6 +6,7 @@ import com.queHacer.queHacer.Event.Model.Event;
 import com.queHacer.queHacer.Event.Model.EventDTO;
 import com.queHacer.queHacer.Event.Model.EventSummaryDTO;
 import com.queHacer.queHacer.Event.Repository.EventRepository;
+import com.queHacer.queHacer.Event.validators.DateRangeValidator;
 import com.queHacer.queHacer.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,9 @@ public class GetEventsByCertainDate implements Query<DateRangeCommand, List<Even
 
     @Override
     public ResponseEntity<List<EventSummaryDTO>> execute(DateRangeCommand input) {
+
+        DateRangeValidator.execute(input);
+
         LocalDateTime startOfDay= input.getStartDate().atStartOfDay();
         LocalDateTime endOfDay = input.getStartDate().atTime(LocalTime.MAX);
 

@@ -10,8 +10,8 @@ public class EventDTO {
     private Integer id;
     private String name;
     private String description;
-    private Long minPrice;
-    private Long maxPrice;
+    private Float minPrice;
+    private Float maxPrice;
     private String instagram;
     private String facebook;
     private String whatsapp;

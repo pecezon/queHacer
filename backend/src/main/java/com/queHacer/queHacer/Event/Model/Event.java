@@ -23,10 +23,10 @@ public class Event {
     private String description;
 
     @Column(name = "minPrice")
-    private Long minPrice;
+    private Float minPrice;
 
     @Column(name = "maxPrice")
-    private Long maxPrice;
+    private Float maxPrice;
 
     @Column(name = "instagram")
     private String instagram;
@@ -46,7 +46,7 @@ public class Event {
     @Column(name = "endDate")
     private LocalDateTime endDate;
 
-    @Column(name="streetNnumber")
+    @Column(name="streetNumber")
     private Integer streetNumber;
 
     @Column(name = "street")
