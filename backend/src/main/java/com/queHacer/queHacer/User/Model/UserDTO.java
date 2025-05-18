@@ -18,10 +18,6 @@ public class UserDTO {
 
     private String lastname;
 
-    private LocalDateTime createdAt;
-
-    private LocalDateTime updatedAt;
-
     private LocalDateTime expirationVerificationCode;
 
     private Boolean isVerified;
@@ -29,12 +25,9 @@ public class UserDTO {
     public UserDTO(AppUser appUser) {
         this.id = appUser.getId();
         this.email = appUser.getEmail();
-
         this.phoneNumber = appUser.getPhoneNumber();
         this.name = appUser.getName();
         this.lastname = appUser.getLastname();
-        this.createdAt = appUser.getCreatedAt();
-        this.updatedAt = appUser.getUpdatedAt();
         this.expirationVerificationCode = appUser.getExpirationVerificationCode();
         this.isVerified = appUser.getIsVerified();
     }

@@ -32,6 +32,8 @@ public class AuthenticationService {
         ArrayList<String> admins = new ArrayList<>();
         admins.add("juanp.cardenas@cetys.edu.mx");
         admins.add("lopez.diego@cetys.edu.mx");
+        admins.add("linette.acosta@cetys.edu.mx");
+        admins.add("carlosmiguel.ibarra@cetys.edu.mx");
 
         if(admins.contains(request.getEmail())) {
             request.setRole(Role.ADMIN);
