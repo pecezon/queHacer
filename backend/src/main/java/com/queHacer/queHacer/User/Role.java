@@ -1,6 +1,7 @@
 package com.queHacer.queHacer.User;
 
-public enum Rol {
+public enum Role {
     USER,
-    EVENT_CREATOR
+    EVENT_CREATOR,
+    ADMIN
 }
