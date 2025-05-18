@@ -54,9 +54,10 @@ export default function App() {
         />
         <NavbarBrand>
           {/* <AcmeLogo /> */}
-          <p class="font-bold text-inherit text-gray-800 dark:text-white">
-            QUE HACER EN...
-          </p>
+          <img src="../images/logoQueHacerEn.svg" alt="Logo" className="w-16 h-auto"/>
+          {/*<p class="font-bold text-inherit text-gray-800 dark:text-white">
+            ¿QUE HACER EN...
+          </p>*/}
         </NavbarBrand>
       </NavbarContent>
 
