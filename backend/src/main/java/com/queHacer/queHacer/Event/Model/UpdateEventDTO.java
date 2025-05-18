@@ -17,13 +17,14 @@ public class UpdateEventDTO {
     private String twitter;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
-    private Integer streetNumber;
+    private String streetNumber;
     private String street;
-    private Integer zip_code;
+    private String zip_code;
     private String county;
     private String city;
     private String country;
     private String phone;
     private Long sumReviews;
     private Double cantReviews;
+    private Integer id_creator;
 }

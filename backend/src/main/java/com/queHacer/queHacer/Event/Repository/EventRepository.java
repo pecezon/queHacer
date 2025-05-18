@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 public interface EventRepository extends JpaRepository<Event, Integer> {
-    @Query("SELECT e from Event e WHERE e.name LIKE CONCAT('%', :keyword, '%') OR e.description LIKE %:keyword%")
+    @Query("SELECT e from Event e WHERE e.name LIKE %:keyword% OR e.description LIKE %:keyword%")
     List<Event> findByName(@Param("keyword") String name);
 
     @Query("SELECT e from Event e WHERE e.id_creator = :keyword")

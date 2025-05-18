@@ -18,9 +18,9 @@ public class EventDTO {
     private String twitter;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
-    private Integer streetNumber;
+    private String streetNumber;
     private String street;
-    private Integer zip_code;
+    private String zip_code;
     private String county;
     private String city;
     private String country;

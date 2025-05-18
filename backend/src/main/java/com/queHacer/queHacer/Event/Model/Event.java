@@ -1,5 +1,6 @@
 package com.queHacer.queHacer.Event.Model;
 
+import com.queHacer.queHacer.User.Model.User;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -16,7 +17,7 @@ public class Event {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "description")
@@ -47,13 +48,10 @@ public class Event {
     private LocalDateTime endDate;
 
     @Column(name="streetNumber")
-    private Integer streetNumber;
+    private String streetNumber;
 
     @Column(name = "street")
     private String street;
-
-    @Column(name = "zip_code")
-    private Integer zip_code;
 
     @Column(name = "county")
     private String county;
@@ -64,7 +62,13 @@ public class Event {
     @Column(name = "country")
     private String country;
 
-    @Column(name = "id_creator")
+    @Column(name = "zip_code")
+    private String zip_code;
+
+
+    // delete all my  events and then volver a implementar el dto en createevent
+
+    @Column(name = "id_creator", nullable = false)
     private Integer id_creator;
 
     @Column(name = "phone")
@@ -72,7 +76,7 @@ public class Event {
 
     @Column (name = "sumReviews")
     private Long sumReviews;
-
+//cambiar valores
     @Column (name = "cantReviews")
     private Double cantReviews;
 

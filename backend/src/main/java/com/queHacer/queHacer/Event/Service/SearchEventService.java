@@ -21,7 +21,10 @@ public class SearchEventService implements Query<String, List<EventSummaryDTO>> 
 
     @Override
     public ResponseEntity<List<EventSummaryDTO>> execute(String input) {
-        return ResponseEntity.ok(eventRepository.findByName(input).stream().map(EventSummaryDTO::new).toList()
+        return ResponseEntity.ok(eventRepository.findByName(input)
+                .stream()
+                .map(EventSummaryDTO::new)
+                .toList()
         );
     }
 }
