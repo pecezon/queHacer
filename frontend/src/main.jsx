@@ -20,6 +20,8 @@ import EventDashboard from "./pages/admin/EventDashboard.jsx";
 import Events from "./pages/event/Events.jsx";
 import User from "./pages/user/User.jsx";
 import { UserProvider } from "./pages/user/UserProvider.jsx";
+import { AuthProvider } from "./context/AuthContext.jsx";
+import { ReviewProvider } from "./context/EventContext.jsx";
 
 const router = createBrowserRouter([
   //Main Page Route
@@ -50,12 +52,14 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <HeroUIProvider>
-      <UserProvider>
-        <RouterProvider
-          router={router}
-          className="light text-foreground bg-background"
-        />
-      </UserProvider>
+      <AuthProvider>
+        <ReviewProvider>
+          <RouterProvider
+            router={router}
+            className="light text-foreground bg-background"
+          />          
+        </ReviewProvider>
+      </AuthProvider>
     </HeroUIProvider>
   </StrictMode>
 );
