@@ -2,6 +2,8 @@ package com.queHacer.queHacer.Event.Model;
 
 import com.queHacer.queHacer.User.Model.User;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -17,12 +19,15 @@ public class Event {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "name", nullable = false)
+    @NotNull(message = "Name is required")
+    @Column(name = "name")
     private String name;
 
+    @NotNull(message = "Description is required")
     @Column(name = "description")
     private String description;
 
+    @NotNull(message = "Minimum price is required")
     @Column(name = "minPrice")
     private Float minPrice;
 
@@ -41,6 +46,7 @@ public class Event {
     @Column(name = "twitter")
     private String twitter;
 
+    @NotNull(message = "Start date is required")
     @Column(name = "startDate")
     private LocalDateTime startDate;
 
@@ -50,34 +56,40 @@ public class Event {
     @Column(name="streetNumber")
     private String streetNumber;
 
+    @NotNull(message = "Street is required")
     @Column(name = "street")
     private String street;
 
     @Column(name = "county")
     private String county;
 
+    @NotNull(message = "City is required")
     @Column(name = "city")
     private String city;
 
+    @NotNull(message = "Country is required")
     @Column(name = "country")
     private String country;
 
+    @NotNull(message = "Zip code is required")
+    @Size(max = 10)
     @Column(name = "zip_code")
     private String zip_code;
 
 
-    // delete all my  events and then volver a implementar el dto en createevent
+    @ManyToOne
+    @JoinColumn (name = "id_creator", nullable = false)
+    private User creator;
 
-    @Column(name = "id_creator", nullable = false)
-    private Integer id_creator;
-
+    @NotNull(message = "Phone number is required")
+    @Size(min = 10, message = "Phone number must be 10 digits long at least")
     @Column(name = "phone")
     private String phone;
 
     @Column (name = "sumReviews")
-    private Long sumReviews;
+    private Double sumReviews;
 //cambiar valores
     @Column (name = "cantReviews")
-    private Double cantReviews;
+    private Long cantReviews;
 
 }

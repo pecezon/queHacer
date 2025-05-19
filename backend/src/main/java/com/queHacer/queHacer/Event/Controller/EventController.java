@@ -57,8 +57,8 @@ public class EventController {
 
 
     @PostMapping("/event")
-    public ResponseEntity<EventDTO> createEvent(@RequestBody Event event){
-        return createEventService.execute(event);
+    public ResponseEntity<EventDTO> createEvent(@RequestBody EventDTO eventDTO){
+        return createEventService.execute(eventDTO);
     }
 
     @GetMapping("/events")

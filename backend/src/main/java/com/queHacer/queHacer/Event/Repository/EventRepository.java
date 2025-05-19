@@ -14,7 +14,7 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
     @Query("SELECT e from Event e WHERE e.name LIKE %:keyword% OR e.description LIKE %:keyword%")
     List<Event> findByName(@Param("keyword") String name);
 
-    @Query("SELECT e from Event e WHERE e.id_creator = :keyword")
+    @Query("SELECT e from Event e WHERE e.creator.id = :keyword")
     List<Event> findByCreatorId(@Param("keyword") Integer idCreator);
 
     @Query("SELECT e from Event e WHERE LOWER(e.city) = LOWER(:city) AND LOWER(e.country) = LOWER(:country)")

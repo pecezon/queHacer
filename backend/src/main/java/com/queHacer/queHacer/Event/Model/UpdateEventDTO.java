@@ -24,7 +24,7 @@ public class UpdateEventDTO {
     private String city;
     private String country;
     private String phone;
-    private Long sumReviews;
-    private Double cantReviews;
+    private Double sumReviews;
+    private Long cantReviews;
     private Integer id_creator;
 }

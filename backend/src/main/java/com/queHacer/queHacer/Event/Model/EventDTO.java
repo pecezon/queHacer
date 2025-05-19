@@ -1,10 +1,15 @@
 package com.queHacer.queHacer.Event.Model;
 
 import jakarta.persistence.Column;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class EventDTO {
     private Integer id;
@@ -26,8 +31,8 @@ public class EventDTO {
     private String country;
     private Integer id_creator;
     private String phone;
-    private Long sumReviews;
-    private Double cantReviews;
+    private Double sumReviews;
+    private Long cantReviews;
 
 
     public EventDTO(Event event) {
@@ -48,9 +53,10 @@ public class EventDTO {
         this.county = event.getCounty();
         this.city = event.getCity();
         this.country = event.getCountry();
-        this.id_creator = event.getId_creator();
         this.phone = event.getPhone();
         this.sumReviews = event.getSumReviews();
         this.cantReviews = event.getCantReviews();
+        this.id_creator = event.getCreator() != null ? event.getCreator()
+                .getId() : null;
     }
 }

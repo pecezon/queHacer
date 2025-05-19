@@ -14,8 +14,8 @@ public class EventSummaryDTO {
     private Integer id;
     private String name;
     private String description;
-    private Long sumReviews;
-    private Double cantReviews;
+    private Double sumReviews;
+    private Long cantReviews;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 

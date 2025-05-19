@@ -37,6 +37,10 @@ public class GetEventServiceTest {
     @Test
     public void given_event_exists_when_get_event_service_return_event_dto(){
 
+        User user = new User();
+        user.setId(1);
+        user.setName("test");
+
         //Given
         Event event = new Event();
         event.setId(12);
@@ -56,10 +60,10 @@ public class GetEventServiceTest {
         event.setCity("Ensenada");
         event.setCountry("Mexico");
         event.setZip_code("81271");
-        event.setId_creator(1);
+        event.setCreator(user);
         event.setPhone("1234567890");
-        event.setSumReviews(23L);
-        event.setCantReviews(21.1);
+        event.setSumReviews(23.0);
+        event.setCantReviews(21L);
 
         // this says 'when' but it's still setting up
         when(eventRepository.findById(12)).thenReturn(Optional.of(event));

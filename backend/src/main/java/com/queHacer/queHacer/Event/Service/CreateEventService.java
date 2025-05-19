@@ -18,16 +18,43 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
-public class CreateEventService implements Command<Event, EventDTO> {
+public class CreateEventService implements Command<EventDTO, EventDTO> {
     private final EventRepository eventRepository;
+    private final UserRepository userRepository;
 
-    public CreateEventService(EventRepository eventRepository) {
+    public CreateEventService(EventRepository eventRepository, UserRepository userRepository) {
         this.eventRepository = eventRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
-    public ResponseEntity<EventDTO> execute(Event event) {
+    public ResponseEntity<EventDTO> execute(EventDTO eventDTO) {
+        User creator = userRepository.findById(eventDTO.getId_creator())
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
+        Event event = new Event();
+
+
+        event.setName(eventDTO.getName());
+        event.setDescription(eventDTO.getDescription());
+        event.setMinPrice(eventDTO.getMinPrice());
+        event.setMaxPrice(eventDTO.getMaxPrice());
+        event.setInstagram(eventDTO.getInstagram());
+        event.setFacebook(eventDTO.getFacebook());
+        event.setWhatsapp(eventDTO.getWhatsapp());
+        event.setTwitter(eventDTO.getTwitter());
+        event.setStartDate(eventDTO.getStartDate());
+        event.setEndDate(eventDTO.getEndDate());
+        event.setStreetNumber(eventDTO.getStreetNumber());
+        event.setStreet(eventDTO.getStreet());
+        event.setZip_code(eventDTO.getZip_code());
+        event.setCounty(eventDTO.getCounty());
+        event.setCity(eventDTO.getCity());
+        event.setCountry(eventDTO.getCountry());
+        event.setPhone(eventDTO.getPhone());
+        event.setSumReviews(event.getSumReviews() != null ? eventDTO.getSumReviews() : 0.0);
+        event.setCantReviews(eventDTO.getCantReviews() != null ? eventDTO.getCantReviews() : 0L);
+        event.setCreator(creator);
 
         EventValidator.execute(event);
 
