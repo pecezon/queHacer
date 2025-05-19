@@ -60,10 +60,12 @@ const EventPage = () => {
           Regresar
         </button>
       </div>
+      
       <Etiquetas eventData={eventData} />
 
-      <div className="w-full flex flex-col lg:flex-row justify-between items-start gap-32 p-6 max-w-6xl mx-auto">
-        <div className="w-full lg:w-1/2">
+      <div className="w-full flex flex-col lg:flex-row gap-8 p-6 max-w-6xl mx-auto">
+        {/* Contenido principal (izquierda en desktop) */}
+        <div className="w-full lg:w-1/2 lg:pr-8">
           <h1 className="text-2xl font-bold mb-4">Descripción</h1>
           <p className="text-md whitespace-pre-line mb-6">
             {eventData.description}
@@ -144,17 +146,18 @@ const EventPage = () => {
               price={eventData.minPrice}
             />
           </div>
+        </div>
 
-          <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
-            <CardEventUbi
-              street={eventData.street}
-              streetNumber={eventData.streetNumber}
-              county={eventData.county}
-              city={eventData.city}
-              country={eventData.country}
-              cp={eventData.cp}
-            />
-          </div>
+        {/* Mapa (derecha en desktop) */}
+        <div className="w-full lg:w-1/2 lg:sticky lg:top-4">
+          <CardEventUbi
+            street={eventData.street}
+            streetNumber={eventData.streetNumber}
+            county={eventData.county}
+            city={eventData.city}
+            country={eventData.country}
+            cp={eventData.cp}
+          />
         </div>
       </div>
     </div>

@@ -159,30 +159,17 @@ export default function App() {
                   key="login"
                   className="px-4 py-3 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-md transition-colors"
                 >
-                  <Button
-                    as={Link}
-                    href="/login"
-                    fullWidth
-                    color="primary"
-                    variant="solid"
-                    className="justify-center shadow-sm hover:shadow-md transition-shadow"
-                  >
-                    Iniciar Sesión
-                  </Button>
+                  <Link href="/login">
+                  Iniciar Sesión
+                  </Link>
                 </DropdownItem>
                 <DropdownItem
                   key="signup"
                   className="px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors"
                 >
-                  <Button
-                    as={Link}
-                    href="/signup"
-                    fullWidth
-                    variant="bordered"
-                    className="justify-center border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20"
-                  >
-                    Registrarse
-                  </Button>
+                  <Link href="/signup">
+                  Registrarse
+                  </Link>
                 </DropdownItem>
               </>
             )}
