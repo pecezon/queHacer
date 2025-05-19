@@ -147,7 +147,7 @@ export default function App() {
                   className="px-4 py-3 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-md text-red-600 dark:text-red-400 transition-colors"
                   onClick={handleLogout}
                 >
-                  <Link className="w-full flex items-center gap-2 text-gray-700 dark:text-gray-200">
+                  <Link className="w-full flex items-center gap-2 text-gray-700 dark:text-gray-200" onClick={handleLogout}>
                     <ArrowRightOnRectangleIcon className="h-5 w-5" />
                     Cerrar Sesión
                   </Link>

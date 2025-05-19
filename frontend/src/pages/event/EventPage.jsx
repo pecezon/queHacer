@@ -148,7 +148,6 @@ const EventPage = () => {
           </div>
         </div>
 
-        {/* Mapa (derecha en desktop) */}
         <div className="w-full lg:w-1/2 lg:sticky lg:top-4">
           <CardEventUbi
             street={eventData.street}
