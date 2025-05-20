@@ -25,11 +25,7 @@ import java.util.Random;
 @Entity
 @Data
 @Table(name = "users")
-<<<<<<< HEAD
-public class AppUser {
-=======
 public class AppUser implements UserDetails {
->>>>>>> fcb313522650464a53fe6f8b62766f4b19ddff44
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
