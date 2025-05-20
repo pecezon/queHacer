@@ -1,7 +1,7 @@
 package com.queHacer.queHacer;
 
 import com.queHacer.queHacer.Exceptions.UserNotFoundException;
-import com.queHacer.queHacer.User.Model.User;
+import com.queHacer.queHacer.User.Model.AppUser;
 import com.queHacer.queHacer.User.Model.UserDTO;
 import com.queHacer.queHacer.User.Repository.UserRepository;
 import com.queHacer.queHacer.User.Rol;
@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
-public class GetUserServiceTest {
+public class GetAppUserServiceTest {
 
     @Mock //
     private UserRepository userRepository;
@@ -36,22 +36,22 @@ public class GetUserServiceTest {
     @Test
     public void given_user_exists_when_get_user_service_return_user_dto(){
         //Given
-        User user = new User();
-        user.setId(1);
-        user.setName("User Name");
-        user.setEmail("mock.email@gmail.com");
-        user.setRol(Rol.USER);
-        user.setLastname("User Lastname");
-        user.setPasswordHash("sdfghjk");
-        user.setPhoneNumber("123456789");
+        AppUser appUser = new AppUser();
+        appUser.setId(1);
+        appUser.setName("User Name");
+        appUser.setEmail("mock.email@gmail.com");
+        appUser.setRol(Rol.USER);
+        appUser.setLastname("User Lastname");
+        appUser.setPasswordHash("sdfghjk");
+        appUser.setPhoneNumber("123456789");
 
-        when(userRepository.findById(1)).thenReturn(Optional.of(user));
+        when(userRepository.findById(1)).thenReturn(Optional.of(appUser));
 
         //When
         ResponseEntity<UserDTO> response = getUserService.execute(1);
 
         //Then
-        assertEquals(ResponseEntity.ok(new UserDTO(user)), response);
+        assertEquals(ResponseEntity.ok(new UserDTO(appUser)), response);
         verify(userRepository, times(1)).findById(1);
     }
 

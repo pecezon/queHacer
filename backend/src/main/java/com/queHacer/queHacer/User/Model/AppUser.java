@@ -13,7 +13,7 @@ import java.util.Random;
 @Entity
 @Data
 @Table(name = "users")
-public class User {
+public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

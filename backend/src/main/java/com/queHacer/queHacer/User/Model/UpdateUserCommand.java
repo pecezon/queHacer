@@ -5,10 +5,10 @@ import lombok.Getter;
 @Getter
 public class UpdateUserCommand {
     private Integer id;
-    private User user;
+    private AppUser appUser;
 
-    public UpdateUserCommand(Integer id, User user) {
+    public UpdateUserCommand(Integer id, AppUser appUser) {
         this.id = id;
-        this.user = user;
+        this.appUser = appUser;
     }
 }
