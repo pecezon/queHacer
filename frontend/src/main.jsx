@@ -18,6 +18,7 @@ import EventPage from "./pages/event/EventPage.jsx";
 import CreateEvent from "./pages/creatorTools/CreateEvent.jsx";
 import EventDashboard from "./pages/admin/EventDashboard.jsx";
 import Events from "./pages/event/Events.jsx";
+import CrearEvento from "./pages/event/crearEvento.jsx"
 
 const router = createBrowserRouter([
   //Main Page Route
@@ -40,6 +41,8 @@ const router = createBrowserRouter([
 
   //Routes to handle errors
   { path: "*", element: <NotFound /> },
+
+  { path: "/crearEvento", element: <CrearEvento /> },
 ]);
 
 createRoot(document.getElementById("root")).render(

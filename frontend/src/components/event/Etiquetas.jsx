@@ -15,9 +15,12 @@ function Etiquetas() {
       
       <div className="z-10 w-full max-w-xs flex flex-col items-center gap-6">
       
-        <h1 className="text-4xl font-bold text-white text-center">
-          {titulo}
-        </h1>
+        <div className="bg-black rounded-full">
+          <h1 className="text-4xl font-bold text-white text-center m-2">
+            {titulo}
+          </h1>  
+        </div>
+        
         
       
         <div className="grid grid-cols-2 gap-3 w-full">
@@ -33,11 +36,13 @@ function Etiquetas() {
           ))}
         </div>
 
-    
-        <div className="text-white font-bold text-5xl text-center">
-          ${menor} <span className="mx-1">-</span> ${mayor}
-          <span className="text-sm "> USD</span>
-        </div>
+          <div className="bg-black rounded-full">
+            <div className="text-white font-bold text-5xl text-center">
+            ${menor} <span className="mx-1">-</span> ${mayor}
+            <span className="text-sm "> USD</span>
+            </div>
+          </div>
+        
       </div>
     </div>
   );

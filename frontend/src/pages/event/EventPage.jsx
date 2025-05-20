@@ -4,6 +4,7 @@ import Nav from "../../components/all/Nav.jsx";
 import Etiquetas from "../../components/event/Etiquetas.jsx";
 import CardEventUbi from "../../components/event/CardEventUbi.jsx";
 import CardTIckets from "./CardTIckets.jsx";
+import Footer from "../../components/all/Footer"
 
 const EventPage = () => {
   const { id } = useParams();
@@ -47,7 +48,8 @@ const EventPage = () => {
         </div>
       </div>
 
-      
+      <Footer></Footer>
+
     </div>
   );
 };
