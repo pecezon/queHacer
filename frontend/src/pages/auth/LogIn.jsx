@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Button, Input } from "@heroui/react";
 import { Link } from "@heroui/react";
 import { useAuth } from "../../context/AuthContext";
-import { mockAuthApi } from "../../mocks/MockAuth";
 import { useNavigate } from "react-router-dom";
+import { loginUser } from "../../components/auth/AuthApi";
 
 function LogIn() {
   const [email, setEmail] = useState("");
@@ -17,11 +17,16 @@ function LogIn() {
     setError("");
 
     try {
-      const { user, token } = await mockAuthApi.login(email, password);
-      login(user, token);
+      const res = await loginUser(email, password);
+      const token = res.token;
+      if (!token || typeof token !== "string")
+        throw new Error("Token inválido");
+
+      login(token);
       navigate("/");
     } catch (err) {
       setError(err.message);
+      console.error("Error en handleSubmit:", err);
     }
   };
 

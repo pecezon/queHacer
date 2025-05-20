@@ -4,13 +4,13 @@ import Nav from "../../components/all/Nav.jsx";
 import Etiquetas from "../../components/event/Etiquetas.jsx";
 import CardEventUbi from "../../components/event/CardEventUbi.jsx";
 import CardTickets from "./CardTickets.jsx";
-import { useReviews } from "../../context/EventContext.jsx";
+import { useEvents } from "../../context/EventContext.jsx";
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import Footer from "../../components/all/Footer";
 
 const EventPage = () => {
   const { id } = useParams();
-  const { getEventById, loading, error } = useReviews();
+  const { getEventById, loading, error } = useEvents();
 
   const eventData = getEventById(id);
   const navigate = useNavigate();
@@ -141,7 +141,7 @@ const EventPage = () => {
 
           <h1 className="text-2xl font-bold mb-4">Compra de boletos</h1>
           <div className="w-full flex justify-center items-center gap-6 p-4 flex-wrap">
-            <CardTIckets
+            <CardTickets
               fecha="27 de marzo de 2025 · Ensenada, Baja California"
               logo="https://cdn.brandfetch.io/idVogTb1a1/w/800/h/800/theme/dark/icon.png"
               price={eventData.minPrice}

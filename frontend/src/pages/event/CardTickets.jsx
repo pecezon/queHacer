@@ -1,7 +1,7 @@
 import { Button, Card, CardBody } from '@heroui/react';
 import React from 'react';
 
-function CardTIckets({ fecha, logo }) {
+function CardTickets({ fecha, logo }) {
   return (
     <div className="w-full p-1 md:w-2/3 lg:w-2/3">
       <Card className="w-full h-full">
@@ -21,4 +21,4 @@ function CardTIckets({ fecha, logo }) {
   );
 }
 
-export default CardTIckets;
+export default CardTickets;
