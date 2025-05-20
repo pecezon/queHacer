@@ -8,6 +8,7 @@ import com.queHacer.queHacer.Place.Model.*;
 import com.queHacer.queHacer.Place.Service.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,11 +40,13 @@ public class PlaceController {
         this.getFullPlaceService = getFullPlaceService;
     }
 
+    @PreAuthorize("hasRole('ADMIN') or hasRole('EVENT_CREATOR')")
     @PostMapping
     public ResponseEntity<PlaceDTO> createPlace(@RequestBody PlaceDTO placedto){
        return createPlaceService.execute(placedto);
     }
 
+    @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
     @GetMapping("/{id}")
     public ResponseEntity<PlaceDTO> getPlaceById(@PathVariable Long id){
         return getPlaceByIdService.execute(id);
@@ -61,19 +64,25 @@ public class PlaceController {
         return searchPlacesByCityAndCountryService.execute(new SearchPlaceByCityAndCountryCommand(city,country));
     }
 
+    @PreAuthorize("hasRole('ADMIN') or #creatorId == authentication.principal.id")
     @GetMapping("/creator/{creatorId}")
     public ResponseEntity<List<SummaryPlaceDTO>> getPlaceByCreatorId(@PathVariable Integer creatorId){
         return getPlaceByCreatorIdService.execute(creatorId);
     }
 
+    @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
     @GetMapping("/full-view/{id}")
     public ResponseEntity<DisplayFullPlaceInfoDTO> getFullPlaceViewById(@PathVariable Long id){
         return getFullPlaceService.execute(id);
     }
+
+    @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
     @PutMapping("/{id}")
     public ResponseEntity<PlaceDTO> updatePlace(@PathVariable Long id, @RequestBody UpdatePlaceDTO updatedPlace){
         return updatePlaceService.execute(new UpdatePlaceCommand(id, updatedPlace));
     }
+
+    @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePlace(@PathVariable Long id){
         return deletePlaceService.execute(id);
