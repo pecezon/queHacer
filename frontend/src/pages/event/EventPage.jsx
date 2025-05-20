@@ -141,7 +141,7 @@ const EventPage = () => {
 
           <h1 className="text-2xl font-bold mb-4">Compra de boletos</h1>
           <div className="w-full flex justify-center items-center gap-6 p-4 flex-wrap">
-            <CardTIckets
+            <CardTickets
               fecha="27 de marzo de 2025 · Ensenada, Baja California"
               logo="https://cdn.brandfetch.io/idVogTb1a1/w/800/h/800/theme/dark/icon.png"
               price={eventData.minPrice}
