@@ -1,12 +1,11 @@
 package com.queHacer.queHacer.Event.Service;
 
 import com.queHacer.queHacer.Event.Model.Event;
-import com.queHacer.queHacer.Event.Model.EventDTO;
 import com.queHacer.queHacer.Event.Model.EventSummaryDTO;
 import com.queHacer.queHacer.Event.Repository.EventRepository;
 import com.queHacer.queHacer.Exceptions.UserNotFoundException;
 import com.queHacer.queHacer.Query;
-import com.queHacer.queHacer.User.Model.User;
+import com.queHacer.queHacer.User.Model.AppUser;
 import com.queHacer.queHacer.User.Repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +29,7 @@ public class GetEventByCreatorIdService implements Query<Integer, List<EventSumm
     @Override
     public ResponseEntity<List<EventSummaryDTO>> execute(Integer input) {
 
-        Optional<User> creator = userRepository.findById(input);
+        Optional<AppUser> creator = userRepository.findById(input);
 
         if (creator.isPresent()){
 

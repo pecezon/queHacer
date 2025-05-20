@@ -5,7 +5,7 @@ import com.queHacer.queHacer.Event.Model.Event;
 import com.queHacer.queHacer.Event.Model.EventDTO;
 import com.queHacer.queHacer.Event.Repository.EventRepository;
 import com.queHacer.queHacer.Event.Service.GetEventService;
-import com.queHacer.queHacer.User.Model.User;
+import com.queHacer.queHacer.User.Model.AppUser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -37,9 +37,9 @@ public class GetEventServiceTest {
     @Test
     public void given_event_exists_when_get_event_service_return_event_dto(){
 
-        User user = new User();
-        user.setId(1);
-        user.setName("test");
+        AppUser appUser = new AppUser();
+        appUser.setId(1);
+        appUser.setName("test");
 
         //Given
         Event event = new Event();
@@ -60,7 +60,7 @@ public class GetEventServiceTest {
         event.setCity("Ensenada");
         event.setCountry("Mexico");
         event.setZip_code("81271");
-        event.setCreator(user);
+        event.setCreator(appUser);
         event.setPhone("1234567890");
         event.setSumReviews(23.0);
         event.setCantReviews(21L);

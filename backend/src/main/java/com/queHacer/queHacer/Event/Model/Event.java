@@ -1,6 +1,6 @@
 package com.queHacer.queHacer.Event.Model;
 
-import com.queHacer.queHacer.User.Model.User;
+import com.queHacer.queHacer.User.Model.AppUser;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -79,7 +79,7 @@ public class Event {
 
     @ManyToOne
     @JoinColumn (name = "id_creator", nullable = false)
-    private User creator;
+    private AppUser creator;
 
     @NotNull(message = "Phone number is required")
     @Size(min = 10, message = "Phone number must be 10 digits long at least")
