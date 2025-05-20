@@ -6,7 +6,7 @@ import com.queHacer.queHacer.Place.Model.Place;
 import com.queHacer.queHacer.Place.Model.PlaceDTO;
 import com.queHacer.queHacer.Place.Repository.PlaceRepository;
 import com.queHacer.queHacer.Place.Service.GetPlaceByIdService;
-import com.queHacer.queHacer.User.Model.User;
+import com.queHacer.queHacer.User.Model.AppUser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -37,7 +37,7 @@ public class GetPlaceServiceTest {
     @Test
     public void given_place_exists_when_get_place_service_returns_place_dto(){
         //Given
-        User creator = new User();
+        AppUser creator = new AppUser();
         creator.setId(1);
         creator.setName("testUser");
 

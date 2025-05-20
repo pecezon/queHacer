@@ -2,18 +2,19 @@ package com.queHacer.queHacer.User.Service;
 
 import com.queHacer.queHacer.Command;
 import com.queHacer.queHacer.Exceptions.UserNotFoundException;
+import com.queHacer.queHacer.User.Model.AppUser;
 import com.queHacer.queHacer.User.Model.UpdateUserCommand;
-import com.queHacer.queHacer.User.Model.User;
 import com.queHacer.queHacer.User.Model.UserDTO;
 import com.queHacer.queHacer.User.Repository.UserRepository;
 import com.queHacer.queHacer.User.Validators.UserValidator;
-import org.springframework.http.HttpStatus;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
+@CachePut(value = "productCache", key = "#command.getId()")
 public class UpdateUserService implements Command<UpdateUserCommand, UserDTO> {
 
     private final UserRepository userRepository;
@@ -24,34 +25,31 @@ public class UpdateUserService implements Command<UpdateUserCommand, UserDTO> {
 
     @Override
     public ResponseEntity<UserDTO> execute(UpdateUserCommand command) {
-        Optional<User> userOptional = userRepository.findById(command.getId());
+        Optional<AppUser> userOptional = userRepository.findById(command.getId());
 
         if(userOptional.isPresent()){
-            User user = userOptional.get();
+            AppUser appUser = userOptional.get();
 
-            if (command.getUser().getEmail() != null) {
-                user.setEmail(command.getUser().getEmail());
+            if (command.getAppUser().getPhoneNumber() != null) {
+                appUser.setPhoneNumber(command.getAppUser().getPhoneNumber());
             }
-            if (command.getUser().getPhoneNumber() != null) {
-                user.setPhoneNumber(command.getUser().getPhoneNumber());
+            if (command.getAppUser().getName() != null) {
+                appUser.setName(command.getAppUser().getName());
             }
-            if (command.getUser().getName() != null) {
-                user.setName(command.getUser().getName());
+            if (command.getAppUser().getLastname() != null) {
+                appUser.setLastname(command.getAppUser().getLastname());
             }
-            if (command.getUser().getLastname() != null) {
-                user.setLastname(command.getUser().getLastname());
+            if (command.getAppUser().getRole() != null) {
+                appUser.setRole(command.getAppUser().getRole());
             }
-            if (command.getUser().getRol() != null) {
-                user.setRol(command.getUser().getRol());
-            }
-            if (command.getUser().getPasswordHash() != null) {
-                user.setPasswordHash(command.getUser().getPasswordHash());
+            if (command.getAppUser().getPasswordHash() != null) {
+                appUser.setPasswordHash(command.getAppUser().getPasswordHash());
             }
 
-            UserValidator.execute(user);
+            UserValidator.execute(appUser);
 
-            userRepository.save(user);
-            return ResponseEntity.ok(new UserDTO(user));
+            userRepository.save(appUser);
+            return ResponseEntity.ok(new UserDTO(appUser));
         }
 
         throw new UserNotFoundException();
