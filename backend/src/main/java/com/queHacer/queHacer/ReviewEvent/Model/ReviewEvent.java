@@ -1,6 +1,7 @@
 package com.queHacer.queHacer.ReviewEvent.Model;
 
 import com.queHacer.queHacer.Event.Model.Event;
+import com.queHacer.queHacer.ReviewEvent.ReviewEventId.ReviewEventId;
 import com.queHacer.queHacer.User.Model.AppUser;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -10,16 +11,16 @@ import lombok.Data;
 @Table(name = "reviews_events")
 public class ReviewEvent {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Integer id;
+    @EmbeddedId
+    private ReviewEventId id;
 
     @ManyToOne
+    @MapsId("idEvent") // nombre del campo en ReviewEventId
     @JoinColumn(name = "id_event")
     private Event event;
 
     @ManyToOne
+    @MapsId("idAppuser") // nombre del campo en ReviewEventId
     @JoinColumn(name = "id_appuser")
     private AppUser appUser;
 
