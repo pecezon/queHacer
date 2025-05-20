@@ -1,18 +1,27 @@
-import React, { useState } from 'react';
-import Nav from '../../components/all/Nav';
-import Footer from '../../components/all/Footer';
+import React, { useState } from "react";
+import Nav from "../../components/all/Nav";
+import Footer from "../../components/all/Footer";
 import { Input, Button, Textarea, Chip } from "@heroui/react";
 
 const categoriasIniciales = [
-  "Comida", "Música", "Arte", "Deporte", "Tecnología", "Moda", "Cultura", "Infantil"
+  "Comida",
+  "Música",
+  "Arte",
+  "Deporte",
+  "Tecnología",
+  "Moda",
+  "Cultura",
+  "Infantil",
 ];
 
-const FormularioLugar = () => {
+const CrearEvento = () => {
   const [categorias, setCategorias] = useState(categoriasIniciales);
 
   const handleEliminarCategoria = (categoria) => {
-    const nuevasCategorias = categorias.filter(c => c !== categoria);
-    setCategorias(nuevasCategorias.length > 0 ? nuevasCategorias : categoriasIniciales);
+    const nuevasCategorias = categorias.filter((c) => c !== categoria);
+    setCategorias(
+      nuevasCategorias.length > 0 ? nuevasCategorias : categoriasIniciales
+    );
   };
 
   return (
@@ -21,7 +30,6 @@ const FormularioLugar = () => {
 
       <main className="flex flex-1 justify-center items-center px-4 py-12">
         <div className="flex flex-col justify-center items-center bg-white p-8 rounded-lg shadow-2xl w-full max-w-lg gap-6">
-
           <Input
             isRequired
             label="Nombre del lugar"
@@ -36,17 +44,9 @@ const FormularioLugar = () => {
             type="text"
           />
 
-          <Input
-            isRequired
-            label="Imagen Banner (URL)"
-            type="url"
-          />
+          <Input isRequired label="Imagen Banner (URL)" type="url" />
 
-          <Input
-            isRequired
-            label="Imagen (URL)"
-            type="url"
-          />
+          <Input isRequired label="Imagen (URL)" type="url" />
 
           <div className="w-full flex flex-col gap-1">
             <div className="flex gap-4">
@@ -96,7 +96,6 @@ const FormularioLugar = () => {
             </div>
           </div>
 
-
           <Button color="primary" variant="flat" className="w-full mt-4">
             Enviar
           </Button>
@@ -108,4 +107,4 @@ const FormularioLugar = () => {
   );
 };
 
-export default FormularioLugar;
+export default CrearEvento;

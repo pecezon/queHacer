@@ -3,10 +3,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import Nav from "../../components/all/Nav.jsx";
 import Etiquetas from "../../components/event/Etiquetas.jsx";
 import CardEventUbi from "../../components/event/CardEventUbi.jsx";
-import CardTIckets from "./CardTIckets.jsx";
+import CardTickets from "./CardTickets.jsx";
 import { useReviews } from "../../context/EventContext.jsx";
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
-import Footer from "../../components/all/Footer"
+import Footer from "../../components/all/Footer";
 
 const EventPage = () => {
   const { id } = useParams();
@@ -61,7 +61,7 @@ const EventPage = () => {
           Regresar
         </button>
       </div>
-      
+
       <Etiquetas eventData={eventData} />
 
       <div className="w-full flex flex-col lg:flex-row gap-8 p-6 max-w-6xl mx-auto">
@@ -162,7 +162,6 @@ const EventPage = () => {
       </div>
 
       <Footer></Footer>
-
     </div>
   );
 };

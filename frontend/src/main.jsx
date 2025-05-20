@@ -22,7 +22,7 @@ import User from "./pages/user/User.jsx";
 import { UserProvider } from "./pages/user/UserProvider.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { ReviewProvider } from "./context/EventContext.jsx";
-import CrearEvento from "./pages/event/crearEvento.jsx"
+import CrearEvento from "./pages/event/CrearEvento.jsx";
 
 const router = createBrowserRouter([
   //Main Page Route
@@ -60,7 +60,7 @@ createRoot(document.getElementById("root")).render(
           <RouterProvider
             router={router}
             className="light text-foreground bg-background"
-          />          
+          />
         </ReviewProvider>
       </AuthProvider>
     </HeroUIProvider>
