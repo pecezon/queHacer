@@ -7,11 +7,13 @@ import SearchBar from "../../components/all/SearchBar";
 import EnsenadaCard from "../../components/landing/EnsenadaCard";
 import CustomCard from "../../components/landing/customCard";
 import ReseniaCard from "../../components/landing/reseniaCard";
+import Footer from "../../components/all/Footer"
+
 
 const Landing = () => {
   const places = [
     {
-      image: "https://scontent.fese1-1.fna.fbcdn.net/v/t39.30808-6/482201782_1036984315126739_4374448235872347733_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeGcLv4a_Jzpe9Cq4Yakosw_zvJpJRgzIKbO8mklGDMgpiFrrtypYrKKeIRlMxOhvEunEFi2rI8-vPRF9B7m9Rdm&_nc_ohc=I3IJxLWAjSgQ7kNvwHn_fSf&_nc_oc=AdnS8bI7Q97n4jhvc52cnBSPesyGEOu_nr375bmALB0a3ExCJufbx-BT3ArMnqJOcXU&_nc_zt=23&_nc_ht=scontent.fese1-1.fna&_nc_gid=Kj5fCXP6EdfASNKmIcjx_A&oh=00_AfEu-7rO3_rfnBn-LkzNPPl7_jXrTYmz-G3NlmkYnPn5Mw&oe=680F5A7F",
+      image: "https://scontent-lax3-2.xx.fbcdn.net/v/t39.30808-6/482201782_1036984315126739_4374448235872347733_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeGcLv4a_Jzpe9Cq4Yakosw_zvJpJRgzIKbO8mklGDMgpiFrrtypYrKKeIRlMxOhvEunEFi2rI8-vPRF9B7m9Rdm&_nc_ohc=zELssXK-snkQ7kNvwFLyuj3&_nc_oc=AdmQygZj14vTQGWRWsqzw0mHArRgTLMw4X8_czKCAmRlxcJza8Px1UFwllrxIrVQVGg&_nc_zt=23&_nc_ht=scontent-lax3-2.xx&_nc_gid=kdd7OQKrlnOCpYKkwb6wGQ&oh=00_AfIiYaOyA7f5wm7HJQ-9qAbs4x0nz9kkiznmy2rZgtEehg&oe=68215EFF",
       title: "Parque Revolución",
       description: "Un espacio tranquilo en el centro de la ciudad con áreas verdes, bancas y una atmósfera relajada, ideal para pasear y observar la vida local."
     },
@@ -70,13 +72,14 @@ const Landing = () => {
 
         <section className="mb-12 sm:mb-20 w-full">
           <h2 className="text-2xl font-bold mb-6 text-center">Lugares destacados</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
             {places.map((place, index) => (
               <CustomCard
                 key={index}
                 image={place.image}
                 title={place.title}
                 description={place.description}
+                className="mx-auto"
               />
             ))}
           </div>
@@ -84,7 +87,7 @@ const Landing = () => {
 
         <section className="mb-12 sm:mb-20 w-full">
           <h2 className="text-2xl font-bold mb-6 text-center">Últimas reseñas</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3  place-items-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
             {reviews.map((review, index) => (
               <ReseniaCard
                 key={index}
@@ -94,11 +97,13 @@ const Landing = () => {
                 date={review.date}
                 avatar={review.avatar}
                 rating={review.rating}
+                className="mx-auto"
               />
             ))}
           </div>
         </section>
       </main>
+      <Footer></Footer>
     </div>
   );
 };

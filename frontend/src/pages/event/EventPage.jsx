@@ -6,6 +6,7 @@ import CardEventUbi from "../../components/event/CardEventUbi.jsx";
 import CardTIckets from "./CardTIckets.jsx";
 import { useReviews } from "../../context/EventContext.jsx";
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
+import Footer from "../../components/all/Footer"
 
 const EventPage = () => {
   const { id } = useParams();
@@ -159,6 +160,9 @@ const EventPage = () => {
           />
         </div>
       </div>
+
+      <Footer></Footer>
+
     </div>
   );
 };

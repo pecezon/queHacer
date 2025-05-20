@@ -21,7 +21,8 @@ const ReseniaCard = ({ restaurant, comment, author, date, avatar, rating }) => {
   };
 
   return (
-    <Card className="w-[350px] h-[250px] shadow-2xl rounded-lg bg-white flex flex-col overflow-hidden">
+    <Card className="w-full max-w-[350px] h-[250px] shadow-lg mx-auto rounded-lg bg-white flex flex-col overflow-hidden">
+                   
       <CardBody className="flex flex-col p-6 h-full">
         <div className="flex-grow">
           <h4 className="text-xl font-bold mb-1 line-clamp-1">{restaurant}</h4>

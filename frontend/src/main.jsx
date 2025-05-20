@@ -22,6 +22,7 @@ import User from "./pages/user/User.jsx";
 import { UserProvider } from "./pages/user/UserProvider.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { ReviewProvider } from "./context/EventContext.jsx";
+import CrearEvento from "./pages/event/crearEvento.jsx"
 
 const router = createBrowserRouter([
   //Main Page Route
@@ -47,6 +48,8 @@ const router = createBrowserRouter([
 
   //Routes to handle errors
   { path: "*", element: <NotFound /> },
+
+  { path: "/crearEvento", element: <CrearEvento /> },
 ]);
 
 createRoot(document.getElementById("root")).render(
