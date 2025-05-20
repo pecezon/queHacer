@@ -1,35 +1,37 @@
 import React, { useState } from "react";
 import { StarIcon } from "@heroicons/react/24/solid";
 import { StarIcon as StarOutline } from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router-dom";
 
 function ReviewCard({
   id,
-  title = "Helados Ramiro",
-  description = "Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story.",
-  initialRating = 4,
-  onRatingChange = () => {},
-  showRatingNumber = true,
-  borderColor = "blue-700",
-  cardSize = "w-72 h-96", 
-  interactive = false,
-  category = "food",
-  imageUrl = "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" 
+  title,
+  description,
+  initialRating,
+  reviewCount,
+  reviewSum,
+  borderColor,
+  category,
+  imageUrl = "https://via.placeholder.com/300",
+  minPrice,
+  maxPrice,
+  location,
+  phoneNumber
 }) {
-  const [rating, setRating] = useState(initialRating);
+  const navigate = useNavigate();
+  const ratingAverage = reviewCount > 0 ? (reviewSum / reviewCount) : 0;
 
-  const handleRatingChange = (newRating) => {
-    if (interactive) {
-      setRating(newRating);
-      onRatingChange(newRating);
-    }
+  const handleClick = () => {
+    navigate(`/event/${id}`);
   };
 
   return (
     <div 
-      className={`relative flex flex-col ${cardSize} border-4 border-${borderColor} rounded-3xl p-4 bg-white shadow-lg overflow-hidden`}
-      data-category={category} 
+    onClick={handleClick}
+      className={`relative flex flex-col w-72 h-96 border-4 border-${borderColor} rounded-3xl p-4 bg-white shadow-lg overflow-hidden`}
+      data-category={category}
     >
-      {/* Sección de Imagen (arriba) */}
+      {/* Imagen */}
       <div className="w-full h-40 mb-3 rounded-xl overflow-hidden">
         <img 
           src={imageUrl} 
@@ -38,38 +40,28 @@ function ReviewCard({
         />
       </div>
 
-      {/* Sección de Texto (centro) */}
+      {/* Contenido */}
       <div className="flex-1 flex flex-col px-2 overflow-y-auto">
-        <h2 className="text-xl font-bold text-gray-800 mb-2">
-          {title}
-        </h2>
-        <p className="text-xs text-gray-600 pr-2">
-          {description}
-        </p>
+        <h2 className="text-xl font-bold text-gray-800 mb-2">{title}</h2>
+        
+        <p className="text-sm text-gray-600 mb-2 line-clamp-5 pr-2">{description}</p>
       </div>
 
-      {/* Sección de Rating (derecha) */}
+      {/* Rating */}
       <div className="absolute right-3 bottom-3 flex flex-col-reverse space-y-1">
         {[1, 2, 3, 4, 5].map((star) => (
-          <button
-            key={star}
-            onClick={() => handleRatingChange(star)}
-            className={`focus:outline-none ${!interactive ? 'cursor-default' : ''}`}
-            disabled={!interactive}
-          >
-            {star <= rating ? (
-              <StarIcon className="h-6 w-6 text-yellow-400" />
-            ) : (
-              <StarOutline className="h-6 w-6 text-gray-300" />
-            )}
-          </button>
+          star <= Math.round(ratingAverage) ? (
+            <StarIcon key={star} className="h-6 w-6 text-yellow-400" />
+          ) : (
+            <StarOutline key={star} className="h-6 w-6 text-gray-300" />
+          )
         ))}
       </div>
 
-      {/* Puntuación numérica (opcional) */}
-      {showRatingNumber && (
-        <div className={`absolute bottom-3 left-3 bg-${borderColor.replace("border-", "")} bg-opacity-20 text-${borderColor.replace("border-", "")} px-2 py-1 rounded-full text-xs font-bold`}>
-          {rating}.0
+      {/* Contador de reviews */}
+      {reviewCount > 0 && (
+        <div className={`absolute bottom-3 left-3 bg-${borderColor} bg-opacity-20 text-${borderColor} px-2 py-1 rounded-full text-xs font-bold`}>
+          {ratingAverage.toFixed(1)} ({reviewCount})
         </div>
       )}
     </div>

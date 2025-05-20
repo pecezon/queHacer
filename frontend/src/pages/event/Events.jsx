@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import Nav from "../../components/all/Nav.jsx";
 import SearchBar from "../../components/all/SearchBar.jsx";
 import "../../index.css";
@@ -8,99 +7,41 @@ import Filtro from "../../components/event/Filtro.jsx";
 import { Button, Drawer, useDisclosure } from "@heroui/react";
 import { FunnelIcon } from "@heroicons/react/24/solid";
 import FilterDrawer from "../../components/event/FilterDrawer.jsx";
+import { useReviews } from "../../context/EventContext.jsx";
 
 function Events() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
-  // Datos de ejemplo con categorías añadidas
-  const initialReviews = [
-    {
-      id: 1,
-      title: "Tacos El Güero",
-      description: "Los mejores tacos de Ensenada.",
-      initialRating: 5,
-      borderColor: "red-500",
-      category: "food",
-      imageUrl: "/images/download.jpeg"
-    },
-    {
-      id: 2,
-      title: "La Cevichería",
-      description: "Ceviche fresco y delicioso. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique enim quaerat ab aut illum omnis quis cum quos explicabo corporis fugit, tempore optio assumenda placeat totam quo doloremque perspiciatis. Aliquid.",
-      initialRating: 4,
-      borderColor: "green-500",
-      category: "food",
-      imageUrl: "/images/cevicheria.png"
-    },
-    {
-      id: 3,
-      title: "Cafe Luna",
-      description: "Café artesanal con ambiente tranquilo.",
-      initialRating: 4,
-      borderColor: "purple-500",
-      category: "food",
-      imageUrl: "/images/cafeluna.jpeg"
-    },
-    {
-      id: 4,
-      title: "Mariscos El Puerto",
-      description: "Excelente atención y sabor.",
-      initialRating: 5,
-      borderColor: "blue-500",
-      category: "food",
-      imageUrl: "/images/elpuerto.jpeg"
-    },
-    {
-      id: 5,
-      title: "Concierto en el Malecón",
-      description: "Gran ambiente musical frente al mar.",
-      initialRating: 4,
-      borderColor: "yellow-500",
-      category: "music",
-      imageUrl: "/images/malecon.jpeg"
-    },
-    {
-      id: 6,
-      title: "Galería de Arte Local",
-      description: "Exhibición de artistas regionales.",
-      initialRating: 3,
-      borderColor: "indigo-500",
-      category: "art",
-      imageUrl: "/images/galeriadearte.jpeg"
-    },
-  ];
-
-  const [reviews, setReviews] = useState(initialReviews);
-  const [filteredReviews, setFilteredReviews] = useState(initialReviews);
-
-  // Manejar cambios en los filtros
-  const handleFilterChange = (filters) => {
-    const filtered = initialReviews.filter((review) => {
-      // Si no hay categorías seleccionadas, mostrar todas (o puedes omitir este filtro)
-      const categoryMatch =
-        filters.categories.length === 0 ||
-        filters.categories.includes(review.category);
-      const ratingMatch = review.initialRating >= filters.minRating;
-      return categoryMatch && ratingMatch;
-    });
-    setFilteredReviews(filtered);
-  };
+  const { filteredReviews, loading, error, handleFilterChange } = useReviews();
 
   const reviewCards = (
     <div className="flex flex-wrap gap-5 justify-center md:justify-start">
       {filteredReviews.map((r) => (
         <ReviewCard
           key={r.id}
-          title={r.title}
+          id= {r.id}
+          title={r.name}
           description={r.description}
-          initialRating={r.initialRating}
-          borderColor={r.borderColor}
-          category={r.category}
-          imageUrl={r.imageUrl}
+          reviewCount={r.reviewCount}
+          reviewSum={r.reviewSum}
+          borderColor="blue-700"
+          category={r.category || "food"}
+          imageUrl={r.mainImage || "https://via.placeholder.com/300"}
+          minPrice={r.minPrice}
+          maxPrice={r.maxPrice}
+          location={`${r.street} ${r.streetNumber}, ${r.county}`}
+          phoneNumber={r.phoneNumber}
         />
       ))}
     </div>
   );
+
+  if (loading) {
+    return <div>Cargando...</div>;
+  }
+
+  if (error) {
+    return <div>ERROR</div>;
+  }
 
   return (
     <div className="w-screen h-screen overflow-x-hidden">

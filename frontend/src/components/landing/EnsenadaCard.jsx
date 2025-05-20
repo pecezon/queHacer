@@ -8,7 +8,7 @@ function EnsenadaCard() {
         <h4 className="text-black font-bold text-xl">ENSENADA</h4>
       </CardHeader>
       <CardBody>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="relative p-2">
             <p className="text-gray-700 text-base">
               Ensenada, Baja California, es una ciudad portuaria en el

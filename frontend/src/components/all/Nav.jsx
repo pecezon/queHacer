@@ -12,25 +12,19 @@ import {
   Dropdown,
   DropdownMenu,
   Avatar,
+  Button,
 } from "@heroui/react";
 import { useState } from "react";
-import '../../index.css'
-
-export const AcmeLogo = () => {
-  return (
-    <svg fill="none" height="36" viewBox="0 0 32 32" width="36">
-      <path
-        clipRule="evenodd"
-        d="M17.6482 10.1305L15.8785 7.02583L7.02979 22.5499H10.5278L17.6482 10.1305ZM19.8798 14.0457L18.11 17.1983L19.394 19.4511H16.8453L15.1056 22.5499H24.7272L19.8798 14.0457Z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-  );
-};
+import "../../index.css";
+import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { CogIcon } from "@heroicons/react/24/solid";
+import { ArrowRightOnRectangleIcon } from "@heroicons/react/20/solid";
 
 export default function App() {
+  const { user, logout, isAuthenticated } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const menuItems = [
     { name: "Descubrir", href: "/", active: false },
@@ -38,31 +32,53 @@ export default function App() {
     { name: "Contacto", href: "#", active: false },
   ];
 
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
+
+  // Avatar name fallbacks
+  const getAvatarName = () => {
+    if (isAuthenticated && user?.name) return user.name;
+    return "Invitado";
+  };
+
+  // Avatar image fallback
+  const getAvatarImage = () => {
+    if (isAuthenticated && user?.picture) return user.picture;
+    return undefined;
+  };
+
   return (
     <Navbar
-      className="bg-white dark:bg-gray shadow-sm w-full flex justify-between items-center"
+      className="bg-white dark:bg-gray-900 shadow-sm w-full flex justify-between items-center p-3"
       maxWidth="full"
       position="sticky"
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
     >
-      {/* Contenido izquierdo (logo + toggle SOLO en móvil) */}
+      {/* Contenido izquierdo */}
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="sm:hidden" // Solo visible en móvil (menos de 640px)
+          className="sm:hidden"
         />
         <NavbarBrand>
-          {/* <AcmeLogo /> */}
-          <img src="../images/logoQueHacerEn.svg" alt="Logo" className="w-16 h-auto"/>
-          {/*<p class="font-bold text-inherit text-gray-800 dark:text-white">
-            ¿QUE HACER EN...
-          </p>*/}
+          <Link href="/">
+            <img
+              src="../images/logo-que-hacer.svg"
+              alt="Logo"
+              className="w-20 h-auto"
+            />
+          </Link>
         </NavbarBrand>
       </NavbarContent>
 
-      {/* Menú principal (visible en tablet y desktop - sm+) */}
-      <NavbarContent className="hidden sm:flex gap-4 justify-center" justify="center">
+      {/* Menú principal */}
+      <NavbarContent
+        className="hidden sm:flex gap-4 justify-center"
+        justify="center"
+      >
         {menuItems.map((item, index) => (
           <NavbarItem key={index} isActive={item.active}>
             <Link
@@ -71,7 +87,7 @@ export default function App() {
               className={
                 item.active
                   ? "text-black font-medium"
-                  : "text-gray-600 hover:text-secondary dark:text-gray-300 dark:hover:text-secondary transition-colors"
+                  : "text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors duration-200"
               }
             >
               {item.name}
@@ -80,74 +96,97 @@ export default function App() {
         ))}
       </NavbarContent>
 
-      {/* Contenido derecho (avatar dropdown) */}
+      {/* Avatar con menú desplegable */}
       <NavbarContent as="div" justify="end">
         <Dropdown placement="bottom-end">
           <DropdownTrigger>
             <Avatar
               isBordered
               as="button"
-              className="transition-transform hover:scale-110"
-              color="secondary"
-              name="Jason Hughes"
+              className="transition-transform hover:scale-110 w-10 h-10 hover:shadow-md"
+              color={isAuthenticated ? "primary" : "default"}
+              name={getAvatarName()}
               size="sm"
-              src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+              src={getAvatarImage()}
             />
           </DropdownTrigger>
           <DropdownMenu
-            aria-label="Profile Actions"
+            aria-label="User Actions"
             variant="flat"
-            className="w-64"
+            className="w-64 p-2"
           >
-            <DropdownItem key="profile" className="h-14 gap-2">
-              <p className="font-semibold">Signed in as</p>
-              <p className="font-semibold text-secondary">zoey@example.com</p>
-            </DropdownItem>
-            <DropdownItem
-              key="settings"
-              className="hover:bg-gray-100 dark:hover:bg-gray-800"
-            >
-              My Settings
-            </DropdownItem>
-            <DropdownItem
-              key="system"
-              className="hover:bg-gray-100 dark:hover:bg-gray-800"
-            >
-              System
-            </DropdownItem>
-            <DropdownItem
-              key="configurations"
-              className="hover:bg-gray-100 dark:hover:bg-gray-800"
-            >
-              Configurations
-            </DropdownItem>
-            <DropdownItem
-              key="help_and_feedback"
-              className="hover:bg-gray-100 dark:hover:bg-gray-800"
-            >
-              Help & Feedback
-            </DropdownItem>
-            <DropdownItem
-              key="logout"
-              color="danger"
-              className="hover:bg-red-50 dark:hover:bg-red-900/20"
-            >
-              Log Out
-            </DropdownItem>
+            {isAuthenticated ? (
+              <>
+                <DropdownItem
+                  key="profile"
+                  className="h-14 gap-2 px-4 py-3 border-b border-gray-100 dark:border-gray-700"
+                >
+                  <div className="flex flex-col">
+                    <p className="font-semibold text-sm text-gray-500">
+                      Sesión iniciada como
+                    </p>
+                    <p className="font-semibold text-blue-600 dark:text-blue-400 truncate">
+                      {user.email}
+                    </p>
+                  </div>
+                </DropdownItem>
+                <DropdownItem
+                  key="settings"
+                  className="px-4 py-3 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-md transition-colors"
+                >
+                  <Link
+                    href="/userPage"
+                    className="w-full flex items-center gap-2 text-gray-700 dark:text-gray-200"
+                  >
+                    <CogIcon className="h-5 w-5" />
+                    Mi Cuenta
+                  </Link>
+                </DropdownItem>
+                <DropdownItem
+                  key="logout"
+                  className="px-4 py-3 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-md text-red-600 dark:text-red-400 transition-colors"
+                  onClick={handleLogout}
+                >
+                  <Link className="w-full flex items-center gap-2 text-gray-700 dark:text-gray-200" onClick={handleLogout}>
+                    <ArrowRightOnRectangleIcon className="h-5 w-5" />
+                    Cerrar Sesión
+                  </Link>
+                </DropdownItem>
+              </>
+            ) : (
+              <>
+                <DropdownItem
+                  key="login"
+                  className="px-4 py-3 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-md transition-colors"
+                >
+                  <Link href="/login">
+                  Iniciar Sesión
+                  </Link>
+                </DropdownItem>
+                <DropdownItem
+                  key="signup"
+                  className="px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors"
+                >
+                  <Link href="/signup">
+                  Registrarse
+                  </Link>
+                </DropdownItem>
+              </>
+            )}
           </DropdownMenu>
         </Dropdown>
       </NavbarContent>
 
-      {/* Menú móvil (SOLO visible en móvil al hacer clic) */}
-      <NavbarMenu className="bg-white dark:bg-gray pt-4 sm:hidden">
+      {/* Menú móvil */}
+      <NavbarMenu className="bg-white dark:bg-gray-900 pt-8 sm:hidden">
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item.name}-${index}`}>
             <Link
               href={item.href}
-              className={`w-full text-lg ${
+              className={`w-full text-lg block px-4 py-2 ${
                 item.active
                   ? "text-black font-medium"
-                  : "text-gray-600 hover:text-secondary dark:text-gray-300"
+                  : "text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
               }`}
               onClick={() => setIsMenuOpen(false)}
             >
