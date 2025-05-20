@@ -1,19 +1,35 @@
 package com.queHacer.queHacer.User.Model;
 
-import com.queHacer.queHacer.User.Rol;
+import com.queHacer.queHacer.User.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
 import java.util.Random;
 
+
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Data
 @Table(name = "users")
+<<<<<<< HEAD
 public class AppUser {
+=======
+public class AppUser implements UserDetails {
+>>>>>>> fcb313522650464a53fe6f8b62766f4b19ddff44
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +51,7 @@ public class AppUser {
     @Column(name = "phoneNumber")
     private String phoneNumber;
 
-    @NotNull(message = "Name is required NIBBA")
+    @NotNull(message = "Name is required")
     @Column(name = "name")
     private String name;
 
@@ -46,7 +62,7 @@ public class AppUser {
     @NotNull(message = "Rol is required")
     @Column(name = "rol")
     @Enumerated(EnumType.STRING)
-    private Rol rol;
+    private Role role;
 
     @Column(nullable = false, updatable = false, name = "createdAt")
     private LocalDateTime createdAt;
@@ -90,8 +106,39 @@ public class AppUser {
         return 100000 + new Random().nextInt(900000);
     }
 
-    public String getEmail(){
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
+    }
+
+    @Override
+    public String getPassword() {
+        return passwordHash;
+    }
+
+    @Override
+    public String getUsername() {
         return email;
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
