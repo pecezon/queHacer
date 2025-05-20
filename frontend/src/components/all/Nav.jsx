@@ -37,13 +37,11 @@ export default function App() {
     navigate("/");
   };
 
-  // Avatar name fallbacks
   const getAvatarName = () => {
-    if (isAuthenticated && user?.name) return user.name;
+    if (isAuthenticated && user?.sub.name) return user.name;
     return "Invitado";
   };
 
-  // Avatar image fallback
   const getAvatarImage = () => {
     if (isAuthenticated && user?.picture) return user.picture;
     return undefined;
@@ -66,7 +64,7 @@ export default function App() {
         <NavbarBrand>
           <Link href="/">
             <img
-              src="../images/logo-que-hacer.svg"
+              src="/images/logo-que-hacer.svg"
               alt="Logo"
               className="w-20 h-auto"
             />
@@ -126,7 +124,7 @@ export default function App() {
                       Sesión iniciada como
                     </p>
                     <p className="font-semibold text-blue-600 dark:text-blue-400 truncate">
-                      {user.email}
+                      {user.sub}
                     </p>
                   </div>
                 </DropdownItem>

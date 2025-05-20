@@ -1,23 +1,29 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-const ReviewContext = createContext();
+const EventContext = createContext();
 
-export function ReviewProvider({ children }) {
-  const [reviews, setReviews] = useState([]);
-  const [filteredReviews, setFilteredReviews] = useState([]);
+export function EventProvider({ children }) {
+  const [events, setEvents] = useState([]);
+  const [filteredEvents, setFilteredEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchReviews = async () => {
+    const fetchEvents = async () => {
       try {
-        const response = await fetch('./events.json');
+        const response = await fetch('http://localhost:8080/events',{
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        }
+        );
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        setReviews(data);
-        setFilteredReviews(data);
+        setEvents(data);
+        setFilteredEvents(data);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -25,40 +31,38 @@ export function ReviewProvider({ children }) {
       }
     };
 
-    fetchReviews();
+    fetchEvents();
   }, []);
 
   const handleFilterChange = (filters) => {
-    const filtered = reviews.filter((review) => {
-      const categoryMatch =
-        filters.categories.length === 0 ||
-        filters.categories.includes(review.category);
-      const ratingMatch = review.initialRating >= filters.minRating;
-      return categoryMatch && ratingMatch;
+    const filtered = events.filter(event => {
+      const cityMatch = !filters.city || event.city.toLowerCase().includes(filters.city.toLowerCase());
+      const nameMatch = !filters.name || event.name.toLowerCase().includes(filters.name.toLowerCase());
+      return cityMatch && nameMatch;
     });
-    setFilteredReviews(filtered);
+    setFilteredEvents(filtered);
   };
 
   const getEventById = (id) => {
-    return reviews.find(event => event.id === parseInt(id));
+    return events.find(event => event.id === parseInt(id));
   };
 
   return (
-    <ReviewContext.Provider 
-      value={{ 
-        reviews, 
-        filteredReviews, 
-        loading, 
-        error, 
+    <EventContext.Provider
+      value={{
+        events,
+        filteredEvents,
+        loading,
+        error,
         handleFilterChange,
-        getEventById 
+        getEventById,
       }}
     >
       {children}
-    </ReviewContext.Provider>
+    </EventContext.Provider>
   );
 }
 
-export function useReviews() {
-  return useContext(ReviewContext);
+export function useEvents() {
+  return useContext(EventContext);
 }

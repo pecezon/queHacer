@@ -7,33 +7,34 @@ import Filtro from "../../components/event/Filtro.jsx";
 import { Button, Drawer, useDisclosure } from "@heroui/react";
 import { FunnelIcon } from "@heroicons/react/24/solid";
 import FilterDrawer from "../../components/event/FilterDrawer.jsx";
-import { useReviews } from "../../context/EventContext.jsx";
+import { useEvents } from "../../context/EventContext.jsx";
 
 function Events() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const { filteredReviews, loading, error, handleFilterChange } = useReviews();
+  const { filteredEvents, loading, error, handleFilterChange } = useEvents();
 
-  const reviewCards = (
-    <div className="flex flex-wrap gap-5 justify-center md:justify-start">
-      {filteredReviews.map((r) => (
-        <ReviewCard
-          key={r.id}
-          id={r.id}
-          title={r.name}
-          description={r.description}
-          reviewCount={r.reviewCount}
-          reviewSum={r.reviewSum}
-          borderColor="blue-700"
-          category={r.category || "food"}
-          imageUrl={r.mainImage || "https://via.placeholder.com/300"}
-          minPrice={r.minPrice}
-          maxPrice={r.maxPrice}
-          location={`${r.street} ${r.streetNumber}, ${r.county}`}
-          phoneNumber={r.phoneNumber}
-        />
-      ))}
-    </div>
-  );
+const eventCards = (
+  <div className="flex flex-wrap gap-5 justify-center md:justify-start">
+    {filteredEvents.map((event) => (
+      <ReviewCard
+        key={event.id}
+        id={event.id}
+        title={event.name}
+        description={event.description}
+        reviewCount={event.cantReviews} 
+        reviewSum={event.sumReviews}
+        borderColor="blue-700"
+        category={"event"} 
+        imageUrl={event.mainImage || "https://via.placeholder.com/300"} 
+        minPrice={event.minPrice}
+        maxPrice={event.maxPrice}
+        location={`${event.street || ''} ${event.streetNumber || ''}, ${event.county}`}
+        phoneNumber={event.phone}
+      />
+    ))}
+  </div>
+);
+
 
   if (loading) {
     return <div>Cargando...</div>;
@@ -75,8 +76,8 @@ function Events() {
         </div>
 
         <div className="flex-1 p-4">
-          {filteredReviews.length > 0 ? (
-            reviewCards
+          {filteredEvents.length > 0 ? (
+            eventCards
           ) : (
             <div className="text-center py-10">
               <p className="text-gray-500">
@@ -101,8 +102,8 @@ function Events() {
 
       {/* Versión móvil */}
       <div className="md:hidden p-4">
-        {filteredReviews.length > 0 ? (
-          reviewCards
+        {filteredEvents.length > 0 ? (
+          eventCards
         ) : (
           <div className="text-center py-10">
             <p className="text-gray-500">
