@@ -18,7 +18,7 @@ function Events() {
       {filteredReviews.map((r) => (
         <ReviewCard
           key={r.id}
-          id= {r.id}
+          id={r.id}
           title={r.name}
           description={r.description}
           reviewCount={r.reviewCount}
