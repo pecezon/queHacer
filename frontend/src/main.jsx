@@ -17,6 +17,12 @@ import NotFound from "./pages/error/NotFound.jsx";
 import EventPage from "./pages/event/EventPage.jsx";
 import CreateEvent from "./pages/creatorTools/CreateEvent.jsx";
 import EventDashboard from "./pages/admin/EventDashboard.jsx";
+import Events from "./pages/event/Events.jsx";
+import User from "./pages/user/User.jsx";
+import { UserProvider } from "./pages/user/UserProvider.jsx";
+import { AuthProvider } from "./context/AuthContext.jsx";
+import { ReviewProvider } from "./context/EventContext.jsx";
+import CrearEvento from "./pages/event/crearEvento.jsx"
 
 const router = createBrowserRouter([
   //Main Page Route
@@ -29,6 +35,7 @@ const router = createBrowserRouter([
 
   //Routes for the event process
   { path: "/event/:id", element: <EventPage /> },
+  { path: "/events", element: <Events /> },
 
   //Routes for the creator tools
   { path: "/createEvent", element: <CreateEvent /> },
@@ -36,17 +43,26 @@ const router = createBrowserRouter([
   //Routes for Admin
   { path: "/eventDashboard", element: <EventDashboard /> },
 
+  //Routes for User
+  { path: "/userPage", element: <User /> },
+
   //Routes to handle errors
   { path: "*", element: <NotFound /> },
+
+  { path: "/crearEvento", element: <CrearEvento /> },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <HeroUIProvider>
-      <RouterProvider
-        router={router}
-        className="light text-foreground bg-background"
-      />
+      <AuthProvider>
+        <ReviewProvider>
+          <RouterProvider
+            router={router}
+            className="light text-foreground bg-background"
+          />          
+        </ReviewProvider>
+      </AuthProvider>
     </HeroUIProvider>
   </StrictMode>
 );
