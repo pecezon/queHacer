@@ -63,7 +63,6 @@ public class EventController {
         return createEventService.execute(eventDTO);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/events")
     public ResponseEntity<List<EventDTO>> getEvents(){
         return getEventsService.execute(null);
