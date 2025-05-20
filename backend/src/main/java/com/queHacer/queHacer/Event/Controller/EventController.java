@@ -6,6 +6,7 @@ import com.queHacer.queHacer.Event.Model.*;
 import com.queHacer.queHacer.Event.Service.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,26 +57,31 @@ public class EventController {
     }
 
 
+    @PreAuthorize("hasRole('ADMIN') or hasRole('EVENT_CREATOR')")
     @PostMapping("/event")
     public ResponseEntity<EventDTO> createEvent(@RequestBody EventDTO eventDTO){
         return createEventService.execute(eventDTO);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/events")
     public ResponseEntity<List<EventDTO>> getEvents(){
         return getEventsService.execute(null);
     }
 
+    @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
     @GetMapping("/event/{id}")
     public ResponseEntity<EventDTO> getEventById(@PathVariable Integer id){
         return getEventService.execute(id);
     }
 
+    @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
     @PutMapping("/event/{id}")
     public ResponseEntity<EventDTO> updateEvent(@PathVariable Integer id, @RequestBody UpdateEventDTO event){
         return updateEventService.execute(new UpdateEventCommand(id, event));
     }
 
+    @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
     @DeleteMapping("/event/{id}")
     public ResponseEntity<Void> deleteEvent(@PathVariable Integer id){
         return deleteEventService.execute(id);
@@ -90,7 +96,6 @@ public class EventController {
     public ResponseEntity<List<EventSummaryDTO>> getEventsByCreatorId(@RequestParam Integer creatorId){
         return getEventByCreatorIdService.execute(creatorId);
     }
-
 
     @GetMapping("/event/search/city-country")
     public ResponseEntity<List<EventSummaryDTO>> getEventsByCity(@RequestParam String city, @RequestParam String country){
