@@ -24,16 +24,18 @@ public class UserController {
     private final GetUserService getUserService;
 
     private final SearchUserService searchUserService;
+    private final GetUserByEmailService getUserByEmailService;
 
     public UserController(
-                          GetUsersService getUsersService,
-                          UpdateUserService updateUserService,
-                          DeleteUserService deleteUserService, GetUserService getUserService, SearchUserService searchUserService) {
+            GetUsersService getUsersService,
+            UpdateUserService updateUserService,
+            DeleteUserService deleteUserService, GetUserService getUserService, SearchUserService searchUserService, GetUserByEmailService getUserByEmailService) {
         this.getUsersService = getUsersService;
         this.updateUserService = updateUserService;
         this.deleteUserService = deleteUserService;
         this.getUserService = getUserService;
         this.searchUserService = searchUserService;
+        this.getUserByEmailService = getUserByEmailService;
     }
 
 
@@ -47,6 +49,12 @@ public class UserController {
     @GetMapping("/user/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable Integer id){
         return getUserService.execute(id);
+    }
+
+    @PreAuthorize("hasRole('ADMIN') or #email == authentication.principal.email")
+    @GetMapping("/user/get-by-email")
+    public ResponseEntity<UserDTO> getUserByEmail(@RequestParam String email){
+        return getUserByEmailService.execute(email);
     }
 
     @GetMapping("/user/search")

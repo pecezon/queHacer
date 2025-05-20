@@ -1,5 +1,5 @@
-import { Button, Card, CardBody } from '@heroui/react';
-import React from 'react';
+import { Button, Card, CardBody } from "@heroui/react";
+import React from "react";
 
 function CardTickets({ fecha, logo }) {
   return (
@@ -13,7 +13,9 @@ function CardTickets({ fecha, logo }) {
               alt="Logo"
               className="w-auto h-6 rounded-full shrink-0"
             />
-            <span className="text-black font-medium whitespace-nowrap">Comprar Boletos</span>
+            <span className="text-black font-medium whitespace-nowrap">
+              Comprar Boletos
+            </span>
           </Button>
         </CardBody>
       </Card>

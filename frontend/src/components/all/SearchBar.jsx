@@ -37,21 +37,22 @@ export const SearchIcon = ({
   );
 };
 
-function SearchBar() {
+function SearchBar({ setCiudad }) {
   return (
-      <Input
-        classNames={{
-          base: "w-full sm:w-6/12 h-10",
-          mainWrapper: "h-full",
-          input: "text-small",
-          inputWrapper:
-            "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
-        }}
-        placeholder="¿Qué hacer en ..."
-        size="lg"
-        startContent={<SearchIcon size={15} />}
-        type="search"
-      />
+    <Input
+      classNames={{
+        base: "w-full sm:w-6/12 h-10",
+        mainWrapper: "h-full",
+        input: "text-small",
+        inputWrapper:
+          "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
+      }}
+      onChange={(e) => setCiudad(e.target.value)}
+      placeholder="¿Qué hacer en ..."
+      size="lg"
+      startContent={<SearchIcon size={15} />}
+      type="search"
+    />
   );
 }
 
