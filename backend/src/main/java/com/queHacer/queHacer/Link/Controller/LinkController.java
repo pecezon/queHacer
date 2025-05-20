@@ -10,6 +10,7 @@ import com.queHacer.queHacer.Link.Model.UpdateLinkDTO;
 import com.queHacer.queHacer.Link.Service.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.w3c.dom.stylesheets.LinkStyle;
 
@@ -33,26 +34,31 @@ public class LinkController {
         this.getLinksForEventService = getLinksForEventService;
     }
 
+    @PreAuthorize("hasRole('ADMIN') or hasRole('EVENT_CREATOR')")
     @PostMapping
     public ResponseEntity<LinkDTO> createLinkForEvent(@RequestBody CreateLinkCommand input){
         return createLinkService.execute(input);
     }
 
+    @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
     @PutMapping("/{id}")
     public ResponseEntity<LinkDTO> updateLink(@PathVariable Long id, @RequestBody UpdateLinkDTO updateLinkDTO){
         return updateLinkService.execute(new UpdateLinkCommand(id,updateLinkDTO));
     }
 
+    @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteLink(@PathVariable Long id){
         return deleteLinkService.execute(id);
     }
 
+    @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
     @GetMapping("/{id}")
     public ResponseEntity<LinkDTO> getLinkById(@PathVariable Long id){
         return getLinkByIdService.execute(id);
     }
 
+    @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
     @GetMapping("/event/{eventId}")
     public ResponseEntity<List<LinkDTO>> getLinksForEvent(@PathVariable Integer eventId){
         return getLinksForEventService.execute(eventId);

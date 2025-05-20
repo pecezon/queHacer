@@ -8,6 +8,7 @@ import com.queHacer.queHacer.PlaceSchedule.Model.PlaceScheduleErrorResponse;
 import com.queHacer.queHacer.PlaceSchedule.Service.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,6 +32,7 @@ public class PlaceScheduleController {
         this.deleteSchedulesForPlaceService = deleteSchedulesForPlaceService;
     }
 
+    @PreAuthorize("hasRole('ADMIN') or hasRole('EVENT_CREATOR')")
     @PostMapping("/place/{placeId}")
     public ResponseEntity<List<PlaceScheduleDTO>> createPlaceSchedules(
             @PathVariable Long placeId,
@@ -39,6 +41,8 @@ public class PlaceScheduleController {
         CreatePlaceSchedulesCommand command = new CreatePlaceSchedulesCommand(placeId, schedules);
         return createPlaceScheduleService.execute(command);
     }
+
+    @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
 
     @PutMapping("/place/{placeId}")
     public ResponseEntity<List<PlaceScheduleDTO>> updateSchedules(
@@ -49,20 +53,26 @@ public class PlaceScheduleController {
         return updatePlaceScheduleService.execute(command);
     }
 
+
+    @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
     @GetMapping("/place/{placeId}")
     public ResponseEntity<List<PlaceScheduleDTO>> getSchedulesByPlaceId(@PathVariable Long placeId){
         return getPlaceSchedulesByPlaceIdService.execute(placeId);
     }
 
+    @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
     @GetMapping("/{scheduleId}")
-    public ResponseEntity<PlaceScheduleDTO> getScheduleById(@PathVariable Long scheduleID){
-        return getScheduleByIdService.execute(scheduleID);
+    public ResponseEntity<PlaceScheduleDTO> getScheduleById(@PathVariable Long scheduleId){
+        return getScheduleByIdService.execute(scheduleId);
     }
 
+    @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
     @DeleteMapping("/{scheduleId}")
     public ResponseEntity<Void> deletePlaceSchedule(@PathVariable Long scheduleId){
         return deletePlaceScheduleService.execute(scheduleId);
     }
+
+    @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
     @DeleteMapping("/place/{placeId}/schedules")
     public ResponseEntity<Void> deleteAllSchedulesForPlace(@PathVariable Long placeId) {
         return deleteSchedulesForPlaceService.execute(placeId);
