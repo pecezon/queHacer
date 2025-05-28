@@ -20,7 +20,7 @@
     "reviewCount": 5,
     "reviewSum": 50,
     "menu": "https://lumina.com/menu.pdf",
-    "mainImage": "/images/cafeluna.jpeg",
+    "mainImage": "/images/lumina.jpeg",
     "phoneNumber": "+52 55 6789 4321"
   },
   {
@@ -28,7 +28,7 @@
     "creatorId": 5,
     "name": "Café del Alba",
     "description": "Cafetería especializada en granos orgánicos de Chiapas y Oaxaca, con ambiente rústico y música en vivo los fines de semana.",
-      "categories": ["Arte", "Exposiciones", "Cafe"],
+    "categories": ["Arte", "Exposiciones", "Cafe"],
     "minPrice": 50.0,
     "maxPrice": 150.0,
     "instagram": "cafe_delalba",
@@ -44,7 +44,7 @@
     "reviewCount": 12,
     "reviewSum": 4.5,
     "menu": "https://cafedelalba.com/menu.pdf",
-    "mainImage": "kajsdlkajsdl",
+    "mainImage": "/images/cafe-alba.jpeg",
     "phoneNumber": "+52 55 1234 5678"
   },
   {
@@ -67,7 +67,7 @@
     "reviewCount": 7,
     "reviewSum": 4.8,
     "menu": "https://barroyfuego.com/talleres.pdf",
-    "mainImage": "asdkjhasdkjh",
+    "mainImage": "/images/barro.jpeg",
     "phoneNumber": "+52 55 7891 2345"
   },
   {
@@ -90,7 +90,7 @@
     "reviewCount": 23,
     "reviewSum": 4.7,
     "menu": "https://elatajo.com/eventos.pdf",
-    "mainImage": "qweiqweqwei",
+    "mainImage": "/images/atajo.jpeg",
     "phoneNumber": "+52 55 2345 6789"
   },
   {
@@ -113,7 +113,7 @@
     "reviewCount": 15,
     "reviewSum": 4.9,
     "menu": "https://omstudio.com/clases.pdf",
-    "mainImage": "zxcvzxcvzxcv",
+    "mainImage": "/images/om.jpeg",
     "phoneNumber": "+52 55 3456 7890"
   }
 ]

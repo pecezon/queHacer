@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 const EventContext = createContext();
 
@@ -11,15 +11,14 @@ export function EventProvider({ children }) {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch('http://localhost:8080/events',{
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            }
-        }
-        );
+        const response = await fetch("./events.json", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         const data = await response.json();
         setEvents(data);
@@ -35,16 +34,20 @@ export function EventProvider({ children }) {
   }, []);
 
   const handleFilterChange = (filters) => {
-    const filtered = events.filter(event => {
-      const cityMatch = !filters.city || event.city.toLowerCase().includes(filters.city.toLowerCase());
-      const nameMatch = !filters.name || event.name.toLowerCase().includes(filters.name.toLowerCase());
+    const filtered = events.filter((event) => {
+      const cityMatch =
+        !filters.city ||
+        event.city.toLowerCase().includes(filters.city.toLowerCase());
+      const nameMatch =
+        !filters.name ||
+        event.name.toLowerCase().includes(filters.name.toLowerCase());
       return cityMatch && nameMatch;
     });
     setFilteredEvents(filtered);
   };
 
   const getEventById = (id) => {
-    return events.find(event => event.id === parseInt(id));
+    return events.find((event) => event.id === parseInt(id));
   };
 
   return (

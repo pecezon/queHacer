@@ -16,7 +16,9 @@ public class GetRecomendationByCityService implements Query<CityDTO, String> {
     @Override
     public ResponseEntity<String> execute(CityDTO ciudad) {
         String prompt ="""
-                Imagina que soy un turista en busca de lugares y eventos para mi visita a la ciudad de %s, que recomendaciones de lugares iconicos y locales me darias, formatea tu respuesta con un breve parrafo platicado sin signos de puntuacion diferentes a comas y puntos
+                Eres parte de una startup tecnologica llamada que hacer la funcion de este prompt es recibir el nombre de la ciudad %s
+                y dar un parrafo breve de lugares turisticos mas locales que comerciales, busca dar los sitios y eventos mas autenticos y amados
+                por los mismos habitantes de la ciudad.
         """.formatted(ciudad.getCiudad());
         String response = aiService.chat(prompt);
 

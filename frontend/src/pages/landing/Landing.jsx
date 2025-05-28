@@ -55,8 +55,7 @@ const Landing = () => {
 
   const places = [
     {
-      image:
-        "https://scontent-lax3-2.xx.fbcdn.net/v/t39.30808-6/482201782_1036984315126739_4374448235872347733_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeGcLv4a_Jzpe9Cq4Yakosw_zvJpJRgzIKbO8mklGDMgpiFrrtypYrKKeIRlMxOhvEunEFi2rI8-vPRF9B7m9Rdm&_nc_ohc=zELssXK-snkQ7kNvwFLyuj3&_nc_oc=AdmQygZj14vTQGWRWsqzw0mHArRgTLMw4X8_czKCAmRlxcJza8Px1UFwllrxIrVQVGg&_nc_zt=23&_nc_ht=scontent-lax3-2.xx&_nc_gid=kdd7OQKrlnOCpYKkwb6wGQ&oh=00_AfIiYaOyA7f5wm7HJQ-9qAbs4x0nz9kkiznmy2rZgtEehg&oe=68215EFF",
+      image: "/images/revolucion.jpg",
       title: "Parque Revolución",
       description:
         "Un espacio tranquilo en el centro de la ciudad con áreas verdes, bancas y una atmósfera relajada, ideal para pasear y observar la vida local.",
