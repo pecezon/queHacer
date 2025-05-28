@@ -11,7 +11,7 @@ export function PlaceProvider({ children }) {
   useEffect(() => {
     const fetchPlaces = async () => {
       try {
-        const response = await fetch("./places.json", {
+        const response = await fetch("http://localhost:8080/place/search/all", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
