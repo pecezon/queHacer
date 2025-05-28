@@ -29,6 +29,7 @@ export default function App() {
   const menuItems = [
     { name: "Descubrir", href: "/", active: false },
     { name: "Eventos", href: "/events", active: false },
+    { name: "Lugares", href: "/places", active: false },
     { name: "Contacto", href: "#", active: false },
   ];
 
@@ -145,7 +146,10 @@ export default function App() {
                   className="px-4 py-3 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-md text-red-600 dark:text-red-400 transition-colors"
                   onClick={handleLogout}
                 >
-                  <Link className="w-full flex items-center gap-2 text-gray-700 dark:text-gray-200" onClick={handleLogout}>
+                  <Link
+                    className="w-full flex items-center gap-2 text-gray-700 dark:text-gray-200"
+                    onClick={handleLogout}
+                  >
                     <ArrowRightOnRectangleIcon className="h-5 w-5" />
                     Cerrar Sesión
                   </Link>
@@ -157,17 +161,13 @@ export default function App() {
                   key="login"
                   className="px-4 py-3 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-md transition-colors"
                 >
-                  <Link href="/login">
-                  Iniciar Sesión
-                  </Link>
+                  <Link href="/login">Iniciar Sesión</Link>
                 </DropdownItem>
                 <DropdownItem
                   key="signup"
                   className="px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors"
                 >
-                  <Link href="/signup">
-                  Registrarse
-                  </Link>
+                  <Link href="/signup">Registrarse</Link>
                 </DropdownItem>
               </>
             )}

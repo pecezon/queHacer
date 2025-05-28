@@ -108,6 +108,7 @@ const Landing = () => {
 
   return (
     <>
+      {/* Drawer for AI response */}
       <Drawer isOpen={isOpen} onOpenChange={onOpenChange}>
         <DrawerContent>
           {(onClose) => (
@@ -143,6 +144,7 @@ const Landing = () => {
           )}
         </DrawerContent>
       </Drawer>
+
       <div className="min-h-screen bg-gray-50">
         <Nav />
 

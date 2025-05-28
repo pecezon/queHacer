@@ -26,9 +26,10 @@ public class PlaceController {
     private final SearchPlacesByCityAndCountryService searchPlacesByCityAndCountryService;
     private final GetPlacesByPriceRangeService getPlacesByPriceRangeService;
     private final GetFullPlaceService getFullPlaceService;
+    private final GetAllPlacesService getAllPlacesService;
 
 
-    public PlaceController(UpdatePlaceService updatePlaceService, CreatePlaceService createPlaceService, DeletePlaceService deletePlaceService, GetPlaceByIdService getPlaceByIdService, SearchPlaceService searchPlaceService, GetPlaceByCreatorIdService getPlaceByCreatorIdService, SearchPlacesByCityAndCountryService searchPlacesByCityAndCountryService, GetPlacesByPriceRangeService getPlacesByPriceRangeService, GetFullPlaceService getFullPlaceService) {
+    public PlaceController(UpdatePlaceService updatePlaceService, CreatePlaceService createPlaceService, DeletePlaceService deletePlaceService, GetPlaceByIdService getPlaceByIdService, SearchPlaceService searchPlaceService, GetPlaceByCreatorIdService getPlaceByCreatorIdService, SearchPlacesByCityAndCountryService searchPlacesByCityAndCountryService, GetPlacesByPriceRangeService getPlacesByPriceRangeService, GetFullPlaceService getFullPlaceService, GetAllPlacesService getAllPlacesService) {
         this.updatePlaceService = updatePlaceService;
         this.createPlaceService = createPlaceService;
         this.deletePlaceService = deletePlaceService;
@@ -38,15 +39,21 @@ public class PlaceController {
         this.searchPlacesByCityAndCountryService = searchPlacesByCityAndCountryService;
         this.getPlacesByPriceRangeService = getPlacesByPriceRangeService;
         this.getFullPlaceService = getFullPlaceService;
+        this.getAllPlacesService = getAllPlacesService;
     }
 
-    @PreAuthorize("hasRole('ADMIN') or hasRole('EVENT_CREATOR')")
+    @GetMapping("search/all")
+    public ResponseEntity<List<PlaceDTO>> getAllPlaces() {
+        return getAllPlacesService.execute(null);
+    }
+
+    //@PreAuthorize("hasRole('ADMIN') or hasRole('EVENT_CREATOR')")
     @PostMapping
     public ResponseEntity<PlaceDTO> createPlace(@RequestBody PlaceDTO placedto){
        return createPlaceService.execute(placedto);
     }
 
-    @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
+    //@PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
     @GetMapping("/{id}")
     public ResponseEntity<PlaceDTO> getPlaceById(@PathVariable Long id){
         return getPlaceByIdService.execute(id);
@@ -64,25 +71,25 @@ public class PlaceController {
         return searchPlacesByCityAndCountryService.execute(new SearchPlaceByCityAndCountryCommand(city,country));
     }
 
-    @PreAuthorize("hasRole('ADMIN') or #creatorId == authentication.principal.id")
+    //@PreAuthorize("hasRole('ADMIN') or #creatorId == authentication.principal.id")
     @GetMapping("/creator/{creatorId}")
     public ResponseEntity<List<SummaryPlaceDTO>> getPlaceByCreatorId(@PathVariable Integer creatorId){
         return getPlaceByCreatorIdService.execute(creatorId);
     }
 
-    @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
+    //@PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
     @GetMapping("/full-view/{id}")
     public ResponseEntity<DisplayFullPlaceInfoDTO> getFullPlaceViewById(@PathVariable Long id){
         return getFullPlaceService.execute(id);
     }
 
-    @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
+    //@PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
     @PutMapping("/{id}")
     public ResponseEntity<PlaceDTO> updatePlace(@PathVariable Long id, @RequestBody UpdatePlaceDTO updatedPlace){
         return updatePlaceService.execute(new UpdatePlaceCommand(id, updatedPlace));
     }
 
-    @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
+    //@PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePlace(@PathVariable Long id){
         return deletePlaceService.execute(id);

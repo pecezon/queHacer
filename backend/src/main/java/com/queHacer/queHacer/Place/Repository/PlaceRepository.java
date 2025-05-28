@@ -26,4 +26,5 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
             "AND (p.minPrice <= :maxPrice OR :maxPrice IS NULL)")
     List<Place> findPlacesByPriceRange(@Param("minPrice") Float minPrice, @Param("maxPrice") Float maxPrice);
 
+
 }

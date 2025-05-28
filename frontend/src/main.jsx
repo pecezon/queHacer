@@ -19,9 +19,11 @@ import CreateEvent from "./pages/creatorTools/CreateEvent.jsx";
 import EventDashboard from "./pages/admin/EventDashboard.jsx";
 import Events from "./pages/event/Events.jsx";
 import User from "./pages/user/User.jsx";
+import Places from "./pages/places/Places.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { EventProvider } from "./context/EventContext.jsx";
 import { ReviewProvider } from "./context/ReviewContext.jsx";
+import { PlaceProvider } from "./context/PlaceContext.jsx";
 
 const router = createBrowserRouter([
   //Main Page Route
@@ -35,6 +37,9 @@ const router = createBrowserRouter([
   //Routes for the event process
   { path: "/event/:id", element: <EventPage /> },
   { path: "/events", element: <Events /> },
+
+  //Routes for the places process
+  { path: "/places", element: <Places /> },
 
   //Routes for the creator tools
   { path: "/createEvent", element: <CreateEvent /> },
@@ -55,10 +60,12 @@ createRoot(document.getElementById("root")).render(
       <AuthProvider>
         <ReviewProvider>
           <EventProvider>
-            <RouterProvider
-              router={router}
-              className="light text-foreground bg-background"
-            />
+            <PlaceProvider>
+              <RouterProvider
+                router={router}
+                className="light text-foreground bg-background"
+              />
+            </PlaceProvider>
           </EventProvider>
         </ReviewProvider>
       </AuthProvider>

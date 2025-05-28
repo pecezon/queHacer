@@ -26,10 +26,10 @@ public class Place {
 
     //@Column(name = "price_range")
     //private Long priceRange;
-    @Column(name = "min_price")
+    @Column(name = "min-price")
     private Float minPrice;
 
-    @Column(name = "max_price")
+    @Column(name = "max-price")
     private Float maxPrice;
 
     @Column

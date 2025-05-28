@@ -57,7 +57,7 @@ public class EventController {
     }
 
 
-    @PreAuthorize("hasRole('ADMIN') or hasRole('EVENT_CREATOR')")
+    //@PreAuthorize("hasRole('ADMIN') or hasRole('EVENT_CREATOR')")
     @PostMapping("/event")
     public ResponseEntity<EventDTO> createEvent(@RequestBody EventDTO eventDTO){
         return createEventService.execute(eventDTO);
@@ -68,19 +68,19 @@ public class EventController {
         return getEventsService.execute(null);
     }
 
-    @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
+    //@PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
     @GetMapping("/event/{id}")
     public ResponseEntity<EventDTO> getEventById(@PathVariable Integer id){
         return getEventService.execute(id);
     }
 
-    @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
+    //@PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
     @PutMapping("/event/{id}")
     public ResponseEntity<EventDTO> updateEvent(@PathVariable Integer id, @RequestBody UpdateEventDTO event){
         return updateEventService.execute(new UpdateEventCommand(id, event));
     }
 
-    @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
+    //@PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
     @DeleteMapping("/event/{id}")
     public ResponseEntity<Void> deleteEvent(@PathVariable Integer id){
         return deleteEventService.execute(id);
